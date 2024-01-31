@@ -83,9 +83,9 @@ namespace p65_72_Zifcak_Ondra_Michlik.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pozadie_registracia_fix {
+        internal static System.Drawing.Bitmap pozadie_registracia_fix_aj_pin {
             get {
-                object obj = ResourceManager.GetObject("pozadie_registracia_fix", resourceCulture);
+                object obj = ResourceManager.GetObject("pozadie_registracia_fix_aj_pin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

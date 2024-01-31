@@ -22,6 +22,9 @@ namespace p65_72_Zifcak_Ondra_Michlik
             textBox_Registracia_Priezvisko.Text = "Priezvisko";
             textBox_Registracia_Priezvisko.ForeColor = System.Drawing.Color.Gray;
 
+            textBox_Registracia_Pin.Text = "Pin";
+            textBox_Registracia_Pin.ForeColor = System.Drawing.Color.Gray;
+
             textBox_Registracia_Tel_Cislo.Text = "Telefonne cislo";
             textBox_Registracia_Tel_Cislo.ForeColor = System.Drawing.Color.Gray;
 
@@ -63,13 +66,15 @@ namespace p65_72_Zifcak_Ondra_Michlik
             }
 
             loginPlaceholder();
+
             this.ActiveControl = null;
+
         }
        
         // Vytvorenie placeholderu pre textboxy v registracii 
 
 
-        // Prepinanie medzi login a register - Ondra
+        // Prepinanie medzi login a register 
 
         private void pictureBox_Login_Register_Click(object sender, EventArgs e)
         {
@@ -84,6 +89,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         private void pictureBox_Registracia_Cancel_Click(object sender, EventArgs e)
         {
             this.ActiveControl = null;
+
             loginPlaceholder();
 
             panel_Registracia.Visible = false;
@@ -91,7 +97,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         }
 
 
-        // Picture box ( tlacidlo ) na login - Zifcak
+        // Picture box ( tlacidlo ) na login 
 
         private void pictureBox_Login_Click(object sender, EventArgs e)
         {
@@ -159,12 +165,13 @@ namespace p65_72_Zifcak_Ondra_Michlik
             string priezvisko = textBox_Registracia_Priezvisko.Text;
             string telefonne_cislo = textBox_Registracia_Tel_Cislo.Text;
             string email = textBox_Registracia_Email.Text;
-            //string adresa = textBox_Registracia_Adresa.Text;
+            
+            string pin = textBox_Registracia_Pin.Text;
 
 
             StreamWriter users = new StreamWriter(users_subor, true, Encoding.UTF8);
 
-            string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8}", id, cislo_uctu, meno, priezvisko, telefonne_cislo, email, adresa, mesto, stav_uctu);
+            string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko,pin, telefonne_cislo, email, adresa, mesto, stav_uctu);
             users.WriteLine(udaje_na_zapis);
 
             users.Flush();
@@ -173,6 +180,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             textBox_Registracia_Meno.Text = "";
             textBox_Registracia_Priezvisko.Text = "";
             textBox_Registracia_Tel_Cislo.Text = "";
+            textBox_Registracia_Pin.Text = "";
             textBox_Registracia_Email.Text = "";
             textBox_Registracia_Adresa.Text = "";
 
@@ -180,7 +188,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         }
 
-        // Picture box ( tlacidlo ) na register - Ondra
+        // Picture box ( tlacidlo ) na register 
 
         private void pictureBox_Registracia_Register_Click(object sender, EventArgs e)
         {
@@ -189,6 +197,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             string meno = textBox_Registracia_Meno.Text;
             string priezvisko = textBox_Registracia_Priezvisko.Text;
             string telefonne_cislo = textBox_Registracia_Tel_Cislo.Text;
+            string pin = textBox_Registracia_Pin.Text;
             string email = textBox_Registracia_Email.Text;
             string adresa = textBox_Registracia_Adresa.Text;
 
@@ -224,9 +233,9 @@ namespace p65_72_Zifcak_Ondra_Michlik
             
             // Podmienka aby sa uzivatel nemohol zaregistrovat bez zadania vsetkych udajov
 
-            if (meno != "" && priezvisko != "" && telefonne_cislo != ""  && email != "" && adresa != "" )
+            if (meno != "" && priezvisko != "" && telefonne_cislo != ""  && email != "" && adresa != "" && pin != "")
             {
-                if(meno != "Meno" && priezvisko != "Priezvisko" && telefonne_cislo != "Telefonne cislo" && email != "email" && adresa != "adresa")
+                if(meno != "Meno" && priezvisko != "Priezvisko" && telefonne_cislo != "Telefonne cislo" && email != "E-mail" && adresa != "Adresa" && pin != "Pin")
                 if (zaregistrovane_emaily.Contains(textBox_Registracia_Email.Text))
                 {
                     MessageBox.Show("Ucet s tymto emailom uz existuje D:");
@@ -236,10 +245,9 @@ namespace p65_72_Zifcak_Ondra_Michlik
                     zapisanieDoSuboru();
                 }
             }
-
         }
 
-        // Osetrenie vstupu na tel. cislo aby tam mohol uzivatel vlozit len cisla
+        // Osetrenie vstupu na tel. cislo a pin aby tam mohol uzivatel vlozit len cisla
 
         private void textBox_Registracia_Tel_Cislo_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -249,57 +257,34 @@ namespace p65_72_Zifcak_Ondra_Michlik
             }
         }
 
+        private void textBox_Registracia_Pin_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+
+
         // Placeholdery - registracia
 
         private void textBox_Registracia_Meno_Click(object sender, EventArgs e)
         {
-            bool placeholder = textBox_Registracia_Meno.Text == "Meno";
-            if (textBox_Registracia_Meno.Focused && placeholder)
+            if (textBox_Registracia_Meno.Text == "Meno")
             {
                 textBox_Registracia_Meno.Text = "";
                 textBox_Registracia_Meno.ForeColor = System.Drawing.Color.Black;
             }
-
         }
 
-        private void textBox_Registracia_Priezvisko_Click(object sender, EventArgs e)
+        private void textBox_Registracia_Meno_Enter(object sender, EventArgs e)
         {
-            bool placeholder = textBox_Registracia_Priezvisko.Text == "Priezvisko";
-            bool empty = textBox_Registracia_Priezvisko.Text == "";
-            if (textBox_Registracia_Priezvisko.Focused && placeholder)
-            {
-                textBox_Registracia_Priezvisko.Text = "";
-                textBox_Registracia_Priezvisko.ForeColor = System.Drawing.Color.Black;
-            }
-        }
-
-        private void textBox_Registracia_Tel_Cislo_Click(object sender, EventArgs e)
-        {
-            bool placeholder = textBox_Registracia_Tel_Cislo.Text == "Telefonne cislo";
-            if (textBox_Registracia_Tel_Cislo.Focused && placeholder)
-            {
-                textBox_Registracia_Tel_Cislo.Text = "";
-                textBox_Registracia_Tel_Cislo.ForeColor = System.Drawing.Color.Black;
-            }
-        }
-
-        private void textBox_Registracia_Email_Click(object sender, EventArgs e)
-        {
-            bool placeholder = textBox_Registracia_Email.Text == "E-mail";
-            if (textBox_Registracia_Email.Focused && placeholder)
-            {
-                textBox_Registracia_Email.Text = "";
-                textBox_Registracia_Email.ForeColor = System.Drawing.Color.Black;
-            }
-        }
-
-        private void textBox_Registracia_Adresa_Click(object sender, EventArgs e)
-        {
-            bool placeholder = textBox_Registracia_Adresa.Text == "Adresa, mesto";
-            if (textBox_Registracia_Adresa.Focused && placeholder)
-            {
-                textBox_Registracia_Adresa.Text = "";
-                textBox_Registracia_Adresa.ForeColor = System.Drawing.Color.Black;
+            if (textBox_Registracia_Meno.Text == "Meno")
+            { 
+                textBox_Registracia_Meno.Text = "";
+                textBox_Registracia_Meno.ForeColor = System.Drawing.Color.Black;
             }
         }
 
@@ -309,6 +294,27 @@ namespace p65_72_Zifcak_Ondra_Michlik
             {
                 textBox_Registracia_Meno.Text = "Meno";
                 textBox_Registracia_Meno.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
+
+        private void textBox_Registracia_Priezvisko_Click(object sender, EventArgs e)
+        {
+            
+            if (textBox_Registracia_Priezvisko.Text == "Priezvisko")
+            {
+                textBox_Registracia_Priezvisko.Text = "";
+                textBox_Registracia_Priezvisko.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void textBox_Registracia_Priezvisko_Enter(object sender, EventArgs e)
+        {
+            bool placeholder = textBox_Registracia_Priezvisko.Text == "Priezvisko";
+            if (textBox_Registracia_Meno.Focused == true && placeholder)
+            {
+                textBox_Registracia_Priezvisko.Text = "";
+                textBox_Registracia_Priezvisko.ForeColor = System.Drawing.Color.Black;
             }
         }
 
@@ -322,12 +328,48 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         }
 
+        private void textBox_Registracia_Tel_Cislo_Click(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Tel_Cislo.Text == "Telefonne cislo")
+            {
+                textBox_Registracia_Tel_Cislo.Text = "";
+                textBox_Registracia_Tel_Cislo.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void textBox_Registracia_Tel_Cislo_Enter(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Tel_Cislo.Text == "Telefonne cislo")
+            {
+                textBox_Registracia_Tel_Cislo.Text = "";
+                textBox_Registracia_Tel_Cislo.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
         private void textBox_Registracia_Tel_Cislo_Leave(object sender, EventArgs e)
         {
             if (textBox_Registracia_Tel_Cislo.Text == "")
             {
                 textBox_Registracia_Tel_Cislo.Text = "Telefonne cislo";
                 textBox_Registracia_Tel_Cislo.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
+        private void textBox_Registracia_Email_Click(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Email.Text == "E-mail")
+            {
+                textBox_Registracia_Email.Text = "";
+                textBox_Registracia_Email.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void textBox_Registracia_Email_Enter(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Email.Text == "E-mail")
+            {
+                textBox_Registracia_Email.Text = "";
+                textBox_Registracia_Email.ForeColor = System.Drawing.Color.Black;
             }
         }
 
@@ -339,6 +381,25 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 textBox_Registracia_Email.ForeColor = System.Drawing.Color.Gray;
             }
         }
+
+        private void textBox_Registracia_Adresa_Click(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Adresa.Text == "Adresa, mesto")
+            {
+                textBox_Registracia_Adresa.Text = "";
+                textBox_Registracia_Adresa.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void textBox_Registracia_Adresa_Enter(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Adresa.Text == "Adresa, mesto")
+            {
+                textBox_Registracia_Adresa.Text = "";
+                textBox_Registracia_Adresa.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
         private void textBox_Registracia_Adresa_Leave(object sender, EventArgs e)
         {
             if (textBox_Registracia_Adresa.Text == "")
@@ -348,9 +409,37 @@ namespace p65_72_Zifcak_Ondra_Michlik
             }
         }
 
-        // Placeholdery - login
+        private void textBox_Registracia_Pin_Click(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Pin.Text == "Pin")
+            {
+                textBox_Registracia_Pin.Text = "";
+                textBox_Registracia_Pin.ForeColor = System.Drawing.Color.Black;
+            }
+        }
 
-        private void textBox_Login_Email_Click(object sender, EventArgs e)
+        private void textBox_Registracia_Pin_Enter(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Pin.Text == "Pin")
+            {
+                textBox_Registracia_Pin.Text = "";
+                textBox_Registracia_Pin.ForeColor = System.Drawing.Color.Black;
+            }
+        }
+
+        private void textBox_Registracia_Pin_Leave(object sender, EventArgs e)
+        {
+            if (textBox_Registracia_Pin.Text == "")
+            { 
+            textBox_Registracia_Pin.Text = "Pin";
+                textBox_Registracia_Pin.ForeColor = System.Drawing.Color.Gray;
+            }
+        }
+
+
+
+        // Placeholdery - login
+        private void textBox_Login_Email_Enter(object sender, EventArgs e)
         {
             bool placeholder = textBox_Login_Email.Text == "E-mail";
             if (textBox_Login_Email.Focused && placeholder)
@@ -358,7 +447,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 textBox_Login_Email.Text = "";
                 textBox_Login_Email.ForeColor = System.Drawing.Color.Black;
             }
-
         }
 
         private void textBox_Login_Email_Leave(object sender, EventArgs e)
@@ -369,7 +457,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 textBox_Login_Email.ForeColor = System.Drawing.Color.Gray;
             }
         }
-        private void textBox_Login_Pin_Click(object sender, EventArgs e)
+
+        private void textBox_Login_Pin_Enter(object sender, EventArgs e)
         {
             bool placeholder = textBox_Login_Pin.Text == "Pin";
             if (textBox_Login_Pin.Focused && placeholder)
@@ -387,7 +476,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 textBox_Login_Pin.ForeColor = System.Drawing.Color.Gray;
             }
         }
-
     }
 }
 

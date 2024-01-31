@@ -98,5 +98,11 @@
   <ItemGroup>
     <None Include="Resources\pozadie_ciste.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_registracia_fix_aj_pin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_registracia_fix_aj_pin1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
