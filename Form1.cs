@@ -55,7 +55,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         {
             InitializeComponent();
             FileStream file;
-
+            
             if (!File.Exists(users_subor))
             {
                 file = File.Create(users_subor);
@@ -158,6 +158,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         }
 
+        // okej
 
         // Picture box ( tlacidlo ) na register - Ondra
 
