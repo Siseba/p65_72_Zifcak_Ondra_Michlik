@@ -97,8 +97,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
         {
             StreamReader users = new StreamReader("users.csv", Encoding.UTF8);
 
-            string hlavicka = users.ReadLine();
-
             string riadok;
             while ((riadok = users.ReadLine()) != null)
             {
@@ -122,17 +120,41 @@ namespace p65_72_Zifcak_Ondra_Michlik
             Close();
         }
 
+        // generovanie cisla uctu
+        // funkcia vracia cislo uctu
+
+        private string generaciaUctu()
+        {
+            rand = new Random();
+            string ucet;
+
+            string[] kodyBaniek = new []{ "0900", "1100", "0200", "7500", "6500" };
+            int r = rand.Next(0, kodyBaniek.Length);
+
+            string kontrolneCislice = Convert.ToString(rand.Next(0,10)) + Convert.ToString(rand.Next(0,10));
+
+            List<string> zakladneCisloUctuList = new List<string>();
+            for (int i = 0; i < 10; i++)
+            {
+                zakladneCisloUctuList.Add(Convert.ToString(rand.Next(0,10)));
+            }
+            string zakladneCisloUctu = string.Concat(zakladneCisloUctuList);
+
+            ucet = "SK" + kontrolneCislice + kodyBaniek[r] + "000000" + zakladneCisloUctu;
+
+            return ucet;
+        }
+
         private void zapisanieDoSuboru()
         {
 
             int id = rand.Next(1000, 10000);
-            int cislo_uctu = 121212;
             int stav_uctu = 0;
 
             string adresa = "hutnicka";
             string mesto = "SNV";
             
-
+            string cislo_uctu = generaciaUctu();
             string meno = textBox_Registracia_Meno.Text;
             string priezvisko = textBox_Registracia_Priezvisko.Text;
             string telefonne_cislo = textBox_Registracia_Tel_Cislo.Text;
@@ -157,8 +179,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
             MessageBox.Show("Uspesne zaregistrovany :D");
 
         }
-
-        // okej cau
 
         // Picture box ( tlacidlo ) na register - Ondra
 
