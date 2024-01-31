@@ -158,7 +158,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         }
 
-        // okej
+        // okej cau
 
         // Picture box ( tlacidlo ) na register - Ondra
 
