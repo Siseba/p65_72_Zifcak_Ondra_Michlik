@@ -68,7 +68,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
             }
 
             loginPlaceholder();
-            panel_Registracia.Enabled = false;
 
             this.ActiveControl = null;
 
@@ -85,10 +84,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
             registerPlaceholder();
 
-            panel_Login.Visible = false;
-            panel_Login.Enabled = false;
-            panel_Registracia.Visible = true;
-            panel_Registracia.Enabled = true;
+            panel_Login.Visible = true;
+            panel_Registracia.Visible = false;
         }
 
         private void pictureBox_Registracia_Cancel_Click(object sender, EventArgs e)
@@ -98,9 +95,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             loginPlaceholder();
 
             panel_Registracia.Visible = false;
-            panel_Registracia.Enabled = false;
             panel_Login.Visible = true;
-            panel_Login.Enabled = true;
         }
 
 
