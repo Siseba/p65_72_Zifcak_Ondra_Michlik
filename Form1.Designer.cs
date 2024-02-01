@@ -193,14 +193,15 @@
             // textBox_Login_Email
             // 
             this.textBox_Login_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_Login_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox_Login_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox_Login_Email.Location = new System.Drawing.Point(171, 163);
             this.textBox_Login_Email.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.textBox_Login_Email.Multiline = true;
             this.textBox_Login_Email.Name = "textBox_Login_Email";
             this.textBox_Login_Email.Size = new System.Drawing.Size(417, 60);
-            this.textBox_Login_Email.TabIndex = 1;
+            this.textBox_Login_Email.TabIndex = 0;
             this.textBox_Login_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox_Login_Email.Click += new System.EventHandler(this.textBox_Login_Email_Click);
             this.textBox_Login_Email.Enter += new System.EventHandler(this.textBox_Login_Email_Enter);
             this.textBox_Login_Email.Leave += new System.EventHandler(this.textBox_Login_Email_Leave);
             // 
@@ -223,8 +224,9 @@
             this.textBox_Login_Pin.Multiline = true;
             this.textBox_Login_Pin.Name = "textBox_Login_Pin";
             this.textBox_Login_Pin.Size = new System.Drawing.Size(417, 60);
-            this.textBox_Login_Pin.TabIndex = 7;
+            this.textBox_Login_Pin.TabIndex = 1;
             this.textBox_Login_Pin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox_Login_Pin.Click += new System.EventHandler(this.textBox_Login_Pin_Click);
             this.textBox_Login_Pin.Enter += new System.EventHandler(this.textBox_Login_Pin_Enter);
             this.textBox_Login_Pin.Leave += new System.EventHandler(this.textBox_Login_Pin_Leave);
             // 
