@@ -56,6 +56,7 @@
             // panel_Registracia
             // 
             this.panel_Registracia.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel_Registracia.BackgroundImage")));
+            this.panel_Registracia.Controls.Add(this.panel_Login);
             this.panel_Registracia.Controls.Add(this.textBox_Registracia_Pin);
             this.panel_Registracia.Controls.Add(this.pictureBox_Registracia_Register);
             this.panel_Registracia.Controls.Add(this.pictureBox_Registracia_Cancel);
@@ -199,7 +200,7 @@
             this.textBox_Login_Email.Multiline = true;
             this.textBox_Login_Email.Name = "textBox_Login_Email";
             this.textBox_Login_Email.Size = new System.Drawing.Size(417, 60);
-            this.textBox_Login_Email.TabIndex = 1;
+            this.textBox_Login_Email.TabIndex = 0;
             this.textBox_Login_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Login_Email.Enter += new System.EventHandler(this.textBox_Login_Email_Enter);
             this.textBox_Login_Email.Leave += new System.EventHandler(this.textBox_Login_Email_Leave);
@@ -220,6 +221,7 @@
             this.textBox_Login_Pin.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox_Login_Pin.Location = new System.Drawing.Point(171, 289);
             this.textBox_Login_Pin.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.textBox_Login_Pin.MaxLength = 4;
             this.textBox_Login_Pin.Multiline = true;
             this.textBox_Login_Pin.Name = "textBox_Login_Pin";
             this.textBox_Login_Pin.Size = new System.Drawing.Size(417, 60);
@@ -255,7 +257,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_ciste;
             this.ClientSize = new System.Drawing.Size(1416, 672);
-            this.Controls.Add(this.panel_Login);
             this.Controls.Add(this.panel_Registracia);
             this.Name = "Form_Login";
             this.Text = "ATM Prihlásenie";
