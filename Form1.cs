@@ -115,8 +115,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
             {
                 string[] hodnoty = riadok.Split(';');
 
-                string email = hodnoty[4].Trim().ToLower();
-                string pin = hodnoty[9].Trim().ToLower();
+                string email = hodnoty[6].Trim().ToLower();
+                string pin = hodnoty[4].Trim().ToLower();
 
                 if (email == textBox_Login_Email.Text && pin == textBox_Login_Pin.Text)
                 {
@@ -191,7 +191,12 @@ namespace p65_72_Zifcak_Ondra_Michlik
             textBox_Registracia_Email.Text = "";
             textBox_Registracia_Adresa.Text = "";
 
-            registerPlaceholder();
+            this.ActiveControl = null;
+
+            loginPlaceholder();
+
+            panel_Registracia.Visible = false;
+            panel_Login.Visible = true;
 
             MessageBox.Show("Uspesne zaregistrovany :D");
 
@@ -487,13 +492,15 @@ namespace p65_72_Zifcak_Ondra_Michlik
             {
                 textBox_Login_Pin.Text = "";
                 textBox_Login_Pin.ForeColor = System.Drawing.Color.Black;
+                textBox_Login_Pin.PasswordChar = '●';
             }
         }
 
         private void textBox_Login_Pin_Leave(object sender, EventArgs e)
         {
             if (textBox_Login_Pin.Text == "")
-            { 
+            {
+                textBox_Login_Pin.PasswordChar = '\0';
                 textBox_Login_Pin.Text = "Pin";
                 textBox_Login_Pin.ForeColor = System.Drawing.Color.Gray;
             }
