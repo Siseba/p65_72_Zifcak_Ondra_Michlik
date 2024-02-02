@@ -5,12 +5,15 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace p65_72_Zifcak_Ondra_Michlik
-{
+{ 
+
     public partial class Form_Login : Form
     {
         private void registerPlaceholder() {
@@ -59,6 +62,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         public Form_Login()
         {
             InitializeComponent();
+            this.ActiveControl = null;
             FileStream file;
             
             if (!File.Exists(users_subor))
@@ -69,8 +73,12 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
             loginPlaceholder();
 
-            this.ActiveControl = null;
-
+            // Vypnutie panelu register a zapnutie panelu login - TabOrder fix
+            panel_Login.Enabled = true;
+            panel_Registracia.Enabled = false;
+            
+            textBox_Login_Email.TabStop = false;
+            textBox_Login_Pin.TabStop = false;
         }
        
         // Vytvorenie placeholderu pre textboxy v registracii 
@@ -84,8 +92,10 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
             registerPlaceholder();
 
-            panel_Login.Visible = true;
-            panel_Registracia.Visible = false;
+            panel_Login.Visible = false;
+            panel_Registracia.Visible = true;
+            panel_Registracia.Enabled = true;
+            panel_Login.Enabled = false;
         }
 
         private void pictureBox_Registracia_Cancel_Click(object sender, EventArgs e)
@@ -96,6 +106,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
             panel_Registracia.Visible = false;
             panel_Login.Visible = true;
+            panel_Login.Enabled = true;
+            panel_Registracia.Enabled = false;
         }
 
 
@@ -114,7 +126,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 string pin = hodnoty[4].Trim().ToLower();
 
                 if (email == textBox_Login_Email.Text && pin == textBox_Login_Pin.Text)
-                {
+                { 
                     this.Hide();
                     Form2 f2 = new Form2();
                     f2.ShowDialog();
@@ -153,6 +165,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
             return ucet;
         }
 
+        // Funkcia na zapisanie udajov do suboru
+
         private void zapisanieDoSuboru()
         {
 
@@ -173,11 +187,13 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
             StreamWriter users = new StreamWriter(users_subor, true, Encoding.UTF8);
 
-            string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko,pin, telefonne_cislo, email, adresa, mesto, stav_uctu);
+            string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko, pin, telefonne_cislo, email, adresa, mesto, stav_uctu);
             users.WriteLine(udaje_na_zapis);
 
             users.Flush();
             users.Close();
+
+            // Vycistenie registracneho formularu po uspesnej registracii
 
             textBox_Registracia_Meno.Text = "";
             textBox_Registracia_Priezvisko.Text = "";
@@ -186,12 +202,19 @@ namespace p65_72_Zifcak_Ondra_Michlik
             textBox_Registracia_Email.Text = "";
             textBox_Registracia_Adresa.Text = "";
 
+
+            // Prepnutie na panel login po registracii
+
             this.ActiveControl = null;
 
             loginPlaceholder();
 
             panel_Registracia.Visible = false;
             panel_Login.Visible = true;
+            panel_Login.Enabled = true;
+            panel_Registracia.Enabled = false;
+
+            // Debug
 
             MessageBox.Show("Uspesne zaregistrovany :D");
 
@@ -201,7 +224,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Registracia_Register_Click(object sender, EventArgs e)
         {
-
 
             string meno = textBox_Registracia_Meno.Text;
             string priezvisko = textBox_Registracia_Priezvisko.Text;
@@ -230,8 +252,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 while ((riadok1 = users.ReadLine()) != null)
                 {
                     string[] hodnoty = riadok1.Split(';');
-                    string nove_cislo = hodnoty[4].Trim().ToLower();
-                    string novy_email = hodnoty[5].Trim().ToLower();
+                    string nove_cislo = hodnoty[5].Trim().ToLower();
+                    string novy_email = hodnoty[6].Trim().ToLower();
                     zaregistrovane_cisla.Add(nove_cislo);
                     zaregistrovane_emaily.Add(novy_email);
                 }
@@ -244,15 +266,19 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
             if (meno != "" && priezvisko != "" && telefonne_cislo != ""  && email != "" && adresa != "" && pin != "")
             {
-                if(meno != "Meno" && priezvisko != "Priezvisko" && telefonne_cislo != "Telefonne cislo" && email != "E-mail" && adresa != "Adresa" && pin != "Pin")
-                if (zaregistrovane_emaily.Contains(textBox_Registracia_Email.Text))
-                {
-                    MessageBox.Show("Ucet s tymto emailom uz existuje D:");
-                }
-                else
-                {
-                    zapisanieDoSuboru();
-                }
+                if (meno != "Meno" && priezvisko != "Priezvisko" && telefonne_cislo != "Telefonne cislo" && email != "E-mail" && adresa != "Adresa" && pin != "Pin")
+                    if (zaregistrovane_emaily.Contains(textBox_Registracia_Email.Text))
+                    {
+                        MessageBox.Show("Ucet s tymto emailom uz existuje D:");
+                    }
+                    else if (zaregistrovane_cisla.Contains(textBox_Registracia_Tel_Cislo.Text))
+                    {
+                        MessageBox.Show("Ucet s tymto telefonnym cislom uz existuje D:");
+                    }
+                    else
+                    { 
+                        zapisanieDoSuboru();
+                    }
             }
         }
 
@@ -273,8 +299,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 e.Handled = true;
             }
         }
-
-
 
 
         // Placeholdery - registracia
@@ -451,6 +475,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void textBox_Login_Email_Click(object sender, EventArgs e)
         {
+            textBox_Login_Email.TabStop = true;
+            textBox_Login_Pin.TabStop = true;
             if (textBox_Login_Email.Text == "E-mail")
             {
                 textBox_Login_Email.Text = "";
@@ -478,7 +504,13 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void textBox_Login_Pin_Click(object sender, EventArgs e)
         {
-
+            textBox_Login_Email.TabStop = true;
+            textBox_Login_Pin.TabStop = true;
+            if (textBox_Login_Pin.Text == "Pin")
+            {
+                textBox_Login_Pin.Text = "";
+                textBox_Login_Pin.ForeColor = System.Drawing.Color.Black;
+            }
         }
 
         private void textBox_Login_Pin_Enter(object sender, EventArgs e)
@@ -500,8 +532,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 textBox_Login_Pin.ForeColor = System.Drawing.Color.Gray;
             }
         }
-
-        
     }
 }
 
