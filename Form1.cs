@@ -173,51 +173,58 @@ namespace p65_72_Zifcak_Ondra_Michlik
             int id = rand.Next(1000, 10000);
             int stav_uctu = 0;
 
-            string adresa = "hutnicka";
-            string mesto = "SNV";
-            
             string cislo_uctu = generaciaUctu();
             string meno = textBox_Registracia_Meno.Text;
             string priezvisko = textBox_Registracia_Priezvisko.Text;
             string telefonne_cislo = textBox_Registracia_Tel_Cislo.Text;
             string email = textBox_Registracia_Email.Text;
-            
-            string pin = textBox_Registracia_Pin.Text;
 
+            string adresa = textBox_Registracia_Adresa.Text;
+            string[] adresneUdaje = adresa.Split(',');
 
-            StreamWriter users = new StreamWriter(users_subor, true, Encoding.UTF8);
+            if (adresneUdaje.Length >= 2)
+            {
+                string adresa_cast = adresneUdaje[0].Trim();
+                string mesto_cast = adresneUdaje[1].Trim();
 
-            string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko, pin, telefonne_cislo, email, adresa, mesto, stav_uctu);
-            users.WriteLine(udaje_na_zapis);
+                string pin = textBox_Registracia_Pin.Text;
 
-            users.Flush();
-            users.Close();
+                StreamWriter users = new StreamWriter(users_subor, true, Encoding.UTF8);
 
-            // Vycistenie registracneho formularu po uspesnej registracii
+                string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko, pin, telefonne_cislo, email, adresa_cast, mesto_cast, stav_uctu);
+                users.WriteLine(udaje_na_zapis);
 
-            textBox_Registracia_Meno.Text = "";
-            textBox_Registracia_Priezvisko.Text = "";
-            textBox_Registracia_Tel_Cislo.Text = "";
-            textBox_Registracia_Pin.Text = "";
-            textBox_Registracia_Email.Text = "";
-            textBox_Registracia_Adresa.Text = "";
+                users.Flush();
+                users.Close();
 
+                // Vycistenie registracneho formularu po uspesnej registracii
 
-            // Prepnutie na panel login po registracii
+                textBox_Registracia_Meno.Text = "";
+                textBox_Registracia_Priezvisko.Text = "";
+                textBox_Registracia_Tel_Cislo.Text = "";
+                textBox_Registracia_Pin.Text = "";
+                textBox_Registracia_Email.Text = "";
+                textBox_Registracia_Adresa.Text = "";
 
-            this.ActiveControl = null;
+                // Prepnutie na panel login po registracii
 
-            loginPlaceholder();
+                this.ActiveControl = null;
 
-            panel_Registracia.Visible = false;
-            panel_Login.Visible = true;
-            panel_Login.Enabled = true;
-            panel_Registracia.Enabled = false;
+                loginPlaceholder();
 
-            // Debug
+                panel_Registracia.Visible = false;
+                panel_Login.Visible = true;
+                panel_Login.Enabled = true;
+                panel_Registracia.Enabled = false;
 
-            MessageBox.Show("Uspesne zaregistrovany :D");
+                // Debug
 
+                MessageBox.Show("Uspesne zaregistrovany :D");
+            }
+            else
+            {
+                MessageBox.Show("Adresa musí obsahovať čiarku pre oddelenie adresy a mesta.");
+            }
         }
 
         // Picture box ( tlacidlo ) na register 
@@ -531,6 +538,16 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 textBox_Login_Pin.Text = "Pin";
                 textBox_Login_Pin.ForeColor = System.Drawing.Color.Gray;
             }
+        }
+
+        private void panel_Login_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form_Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
