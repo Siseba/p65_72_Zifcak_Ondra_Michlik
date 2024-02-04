@@ -192,17 +192,16 @@
             this.panel_Login.Name = "panel_Login";
             this.panel_Login.Size = new System.Drawing.Size(1416, 672);
             this.panel_Login.TabIndex = 11;
-            this.panel_Login.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Login_Paint);
             // 
             // textBox_Login_Email
             // 
             this.textBox_Login_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Login_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Login_Email.Location = new System.Drawing.Point(171, 163);
+            this.textBox_Login_Email.Location = new System.Drawing.Point(171, 172);
             this.textBox_Login_Email.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.textBox_Login_Email.Multiline = true;
             this.textBox_Login_Email.Name = "textBox_Login_Email";
-            this.textBox_Login_Email.Size = new System.Drawing.Size(417, 60);
+            this.textBox_Login_Email.Size = new System.Drawing.Size(417, 48);
             this.textBox_Login_Email.TabIndex = 0;
             this.textBox_Login_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Login_Email.Click += new System.EventHandler(this.textBox_Login_Email_Click);
@@ -266,7 +265,6 @@
             this.Controls.Add(this.panel_Registracia);
             this.Name = "Form_Login";
             this.Text = "ATM Prihlásenie";
-            this.Load += new System.EventHandler(this.Form_Login_Load);
             this.panel_Registracia.ResumeLayout(false);
             this.panel_Registracia.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Registracia_Register)).EndInit();

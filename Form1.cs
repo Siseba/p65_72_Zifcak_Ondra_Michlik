@@ -29,6 +29,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
         List<string> zaregistrovane_emaily = new List<string>();
         List<int> zaregistrovane_id = new List<int>();
 
+        public static string idPrihlasenehoPouzivatela;
+
         // Vytvorenie placeholderov pre register
 
         private void registerPlaceholder()
@@ -135,13 +137,14 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
                 if (email == textBox_Login_Email.Text && pin == textBox_Login_Pin.Text)
                 {
+                    idPrihlasenehoPouzivatela = hodnoty[0];
                     this.Hide();
-                    Form2 f2 = new Form2();
+                    Form_Domov f2 = new Form_Domov();
                     f2.ShowDialog();
                     this.Close();
                 }
-                else MessageBox.Show("Zadal si nespravne udaje!");
             }
+            MessageBox.Show("Zadal si nespravne udaje!");
         }
 
         private void pictureBox_Login_Close_Click(object sender, EventArgs e)
@@ -365,6 +368,9 @@ namespace p65_72_Zifcak_Ondra_Michlik
             }
              else MessageBox.Show("Musíš vyplniť všetky údaje!", "Chyba!");
         }
+
+    
+
 
         // Osetrenie vstupu na tel. cislo a pin aby tam mohol uzivatel vlozit len cisla
 
@@ -608,16 +614,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 textBox_Login_Pin.Text = "Pin";
                 textBox_Login_Pin.ForeColor = System.Drawing.Color.Gray;
             }
-        }
-
-        private void panel_Login_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Form_Login_Load(object sender, EventArgs e)
-        {
-
         }
 
 

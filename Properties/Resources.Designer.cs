@@ -73,6 +73,26 @@ namespace p65_72_Zifcak_Ondra_Michlik.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pozadie_ciste1 {
+            get {
+                object obj = ResourceManager.GetObject("pozadie_ciste1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pozadie_domovska_plocha {
+            get {
+                object obj = ResourceManager.GetObject("pozadie_domovska_plocha", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pozadie_login_fix {
             get {
                 object obj = ResourceManager.GetObject("pozadie_login_fix", resourceCulture);
@@ -83,9 +103,49 @@ namespace p65_72_Zifcak_Ondra_Michlik.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pozadie_prevod_na_ucet {
+            get {
+                object obj = ResourceManager.GetObject("pozadie_prevod_na_ucet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pozadie_profil {
+            get {
+                object obj = ResourceManager.GetObject("pozadie_profil", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pozadie_registracia_fix_aj_pin {
             get {
                 object obj = ResourceManager.GetObject("pozadie_registracia_fix_aj_pin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vklad_pozadie {
+            get {
+                object obj = ResourceManager.GetObject("vklad_pozadie", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap vyber_pozadie {
+            get {
+                object obj = ResourceManager.GetObject("vyber_pozadie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

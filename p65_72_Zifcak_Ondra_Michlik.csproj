@@ -63,6 +63,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -103,6 +106,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\pozadie_registracia_fix_aj_pin1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_ciste1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_domovska_plocha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vklad_pozadie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vyber_pozadie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_prevod_na_ucet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_profil.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
