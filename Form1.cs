@@ -3,21 +3,36 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace p65_72_Zifcak_Ondra_Michlik
-{ 
+{
 
     public partial class Form_Login : Form
     {
-        private void registerPlaceholder() {
-            
+
+        // Globalne premenne
+
+        Random rand = new Random();
+
+        string users_subor = "users.csv";
+
+        List<string> zaregistrovane_cisla = new List<string>();
+        List<string> zaregistrovane_emaily = new List<string>();
+        List<int> zaregistrovane_id = new List<int>();
+
+        // Vytvorenie placeholderov pre register
+
+        private void registerPlaceholder()
+        {
 
             textBox_Registracia_Meno.Text = "Meno";
             textBox_Registracia_Meno.ForeColor = System.Drawing.Color.Gray;
@@ -39,8 +54,11 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         }
 
-        private void loginPlaceholder() {
-            // Vytvorenie placeholderu pre textboxy v logine
+
+        // Vytvorenie placeholderu pre textboxy v logine
+
+        private void loginPlaceholder()
+        {
 
             this.ActiveControl = null;
 
@@ -51,20 +69,12 @@ namespace p65_72_Zifcak_Ondra_Michlik
             textBox_Login_Pin.ForeColor = System.Drawing.Color.Gray;
         }
 
-        string users_subor = "users.csv";
-
-        List<string> zaregistrovane_cisla = new List<string>();
-        List<string> zaregistrovane_emaily = new List<string>();
-        List<int> zaregistrovane_id = new List<int>();
-
-        Random rand = new Random();
-
         public Form_Login()
         {
             InitializeComponent();
             this.ActiveControl = null;
             FileStream file;
-            
+
             if (!File.Exists(users_subor))
             {
                 file = File.Create(users_subor);
@@ -76,12 +86,10 @@ namespace p65_72_Zifcak_Ondra_Michlik
             // Vypnutie panelu register a zapnutie panelu login - TabOrder fix
             panel_Login.Enabled = true;
             panel_Registracia.Enabled = false;
-            
+
             textBox_Login_Email.TabStop = false;
             textBox_Login_Pin.TabStop = false;
         }
-       
-        // Vytvorenie placeholderu pre textboxy v registracii 
 
 
         // Prepinanie medzi login a register 
@@ -126,18 +134,83 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 string pin = hodnoty[4].Trim().ToLower();
 
                 if (email == textBox_Login_Email.Text && pin == textBox_Login_Pin.Text)
-                { 
+                {
                     this.Hide();
                     Form2 f2 = new Form2();
                     f2.ShowDialog();
                     this.Close();
                 }
+                else MessageBox.Show("Zadal si nespravne udaje!");
             }
         }
 
         private void pictureBox_Login_Close_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+
+        // Funkcia na osetrenie vstupu mena a priezviska
+
+        private bool spravneMenoPriezvisko()
+        {
+            string meno = textBox_Registracia_Meno.Text;
+            string priezvisko = textBox_Registracia_Priezvisko.Text;
+            meno.ToCharArray();
+            priezvisko.ToCharArray();
+            for (int i = 0; i < meno.Length; i++)
+            {
+                if (char.IsDigit(meno[i])) return false;
+            }
+            for (int j = 0; j < priezvisko.Length; j++)
+            {
+                if (char.IsDigit(priezvisko[j])) return false;
+            }
+            if ((meno.Length > 2) && (priezvisko.Length > 2)) return true;
+            else return false;
+        }
+
+        // Funkcia na osetrenie vstupu telefonneho cisla
+
+        private bool spravneTelefonneCislo()
+        {
+            string telefonneCislo = textBox_Registracia_Tel_Cislo.Text;
+            telefonneCislo.ToCharArray();
+            if (telefonneCislo.Length == 10) return true;
+            else return false;
+        }
+
+        // Funkcia na osetrenie vstupu pre pin
+
+        private bool spravnyPin()
+        {
+            string pin = textBox_Registracia_Pin.Text;
+            pin.ToCharArray();
+            if (pin.Length == 4) return true;
+            else return false;
+        }
+
+        // Funkcia na osetrenie vstupu emailu
+
+        private bool spravnyEmail()
+        {
+            int pocetZavinacov = 0;
+            string email = textBox_Registracia_Email.Text;
+            email.ToCharArray();
+            if (email.Contains('@') && email.Contains('.') && email.Length >= 5)
+            {
+                for (int i = 0; i < email.Length; i++) { if (email[i] == '@') pocetZavinacov++; }
+
+                if (pocetZavinacov < 2)
+                {
+                    int zavinacSymbol = email.IndexOf("@");
+                    int bodkaSymbol = email.IndexOf(".");
+                    if (zavinacSymbol != 0 && email[zavinacSymbol - 1] != '.' && bodkaSymbol != (zavinacSymbol + 1) && bodkaSymbol != (email.Length - 1) && email[bodkaSymbol + 1] != '.') return true;
+                    else return false;
+                }
+                else return false;
+            }
+            else return false;
         }
 
         // generovanie cisla uctu
@@ -148,15 +221,15 @@ namespace p65_72_Zifcak_Ondra_Michlik
             rand = new Random();
             string ucet;
 
-            string[] kodyBaniek = new []{ "0900", "1100", "0200", "7500", "6500" };
+            string[] kodyBaniek = new[] { "0900", "1100", "0200", "7500", "6500" };
             int r = rand.Next(0, kodyBaniek.Length);
 
-            string kontrolneCislice = Convert.ToString(rand.Next(0,10)) + Convert.ToString(rand.Next(0,10));
+            string kontrolneCislice = Convert.ToString(rand.Next(0, 10)) + Convert.ToString(rand.Next(0, 10));
 
             List<string> zakladneCisloUctuList = new List<string>();
             for (int i = 0; i < 10; i++)
             {
-                zakladneCisloUctuList.Add(Convert.ToString(rand.Next(0,10)));
+                zakladneCisloUctuList.Add(Convert.ToString(rand.Next(0, 10)));
             }
             string zakladneCisloUctu = string.Concat(zakladneCisloUctuList);
 
@@ -219,11 +292,11 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
                 // Debug
 
-                MessageBox.Show("Uspesne zaregistrovany :D");
+                MessageBox.Show("Bol si úspešne zaregistrovaný.");
             }
             else
             {
-                MessageBox.Show("Adresa musí obsahovať čiarku pre oddelenie adresy a mesta.");
+                MessageBox.Show("Adresa musí obsahovať čiarku pre oddelenie adresy a mesta.", "Chyba!");
             }
         }
 
@@ -239,74 +312,71 @@ namespace p65_72_Zifcak_Ondra_Michlik
             string email = textBox_Registracia_Email.Text;
             string adresa = textBox_Registracia_Adresa.Text;
 
-            // Precitanie vsetkych udajov v subore s uzivatelmi
-            // V pripade ze subor je prazdny => Aktualne udaje sa hned zapisu 
-            // V pripade ze sa v subore nachadzaju udaje => Najdene udaje sa zapisu do docastneho listu 
-            // pomocou ktoreho sa neskor bude zistovat ci dany uzivatel uz existuje alebo nie :D
-
-            StreamReader users = new StreamReader(users_subor);
-            string riadok;
-            if ((riadok = users.ReadLine()) == null)
-            {
-                zaregistrovane_cisla.Add(textBox_Registracia_Tel_Cislo.Text);
-                zaregistrovane_emaily.Add(textBox_Registracia_Email.Text);
-                users.Close();
-                zapisanieDoSuboru();
-            }
-            else
-            {
-                string riadok1;
-                while ((riadok1 = users.ReadLine()) != null)
-                {
-                    string[] hodnoty = riadok1.Split(';');
-                    string nove_cislo = hodnoty[5].Trim().ToLower();
-                    string novy_email = hodnoty[6].Trim().ToLower();
-                    zaregistrovane_cisla.Add(nove_cislo);
-                    zaregistrovane_emaily.Add(novy_email);
-                }
-
-                users.Close();
-            }
-
-            
-            // Podmienka aby sa uzivatel nemohol zaregistrovat bez zadania vsetkych udajov
-
-            if (meno != "" && priezvisko != "" && telefonne_cislo != ""  && email != "" && adresa != "" && pin != "")
+            if (meno != "" && priezvisko != "" && telefonne_cislo != "" && email != "" && adresa != "" && pin != "")
             {
                 if (meno != "Meno" && priezvisko != "Priezvisko" && telefonne_cislo != "Telefonne cislo" && email != "E-mail" && adresa != "Adresa" && pin != "Pin")
-                    if (zaregistrovane_emaily.Contains(textBox_Registracia_Email.Text))
+                {
+                    if (spravnyEmail() && spravneTelefonneCislo() && spravneMenoPriezvisko() && spravnyPin())
                     {
-                        MessageBox.Show("Ucet s tymto emailom uz existuje D:");
+                        StreamReader users = new StreamReader(users_subor);
+                        string riadok;
+                        if (string.IsNullOrEmpty(riadok = users.ReadLine()))
+                        {
+                            zaregistrovane_cisla.Add(textBox_Registracia_Tel_Cislo.Text);
+                            zaregistrovane_emaily.Add(textBox_Registracia_Email.Text);
+                            users.Close();
+                            zapisanieDoSuboru();
+                        }
+                        else
+                        {
+                            string riadok1;
+                            while (!string.IsNullOrEmpty(riadok1 = users.ReadLine()))
+                            {
+                                string[] hodnoty = riadok1.Split(';');
+                                string nove_cislo = hodnoty[5].Trim().ToLower();
+                                string novy_email = hodnoty[6].Trim().ToLower();
+                                zaregistrovane_cisla.Add(nove_cislo);
+                                zaregistrovane_emaily.Add(novy_email);
+                            }
+
+                            users.Close();
+
+                            if (zaregistrovane_emaily.Contains(textBox_Registracia_Email.Text))
+                            {
+                                MessageBox.Show("Ucet s tymto emailom uz existuje D:");
+                            }
+                            else if (zaregistrovane_cisla.Contains(textBox_Registracia_Tel_Cislo.Text))
+                            {
+                                MessageBox.Show("Ucet s tymto telefonnym cislom uz existuje D:");
+                            }
+                            else
+                            {
+                                zapisanieDoSuboru();
+                            }
+                        }
+
                     }
-                    else if (zaregistrovane_cisla.Contains(textBox_Registracia_Tel_Cislo.Text))
-                    {
-                        MessageBox.Show("Ucet s tymto telefonnym cislom uz existuje D:");
-                    }
-                    else
-                    { 
-                        zapisanieDoSuboru();
-                    }
+                    else if (!spravneMenoPriezvisko()) MessageBox.Show("Zadal si nesprávne meno alebo priezvisko!", "Chyba!");
+                    else if (!spravneTelefonneCislo()) MessageBox.Show("Zadal si nesprávne telefónne číslo!", "Chyba!");
+                    else if (!spravnyPin()) MessageBox.Show("Zadal si nesprávny pin!", "Chyba!");
+                    else if (!spravnyEmail()) MessageBox.Show("Zadal si nesprávny e-mail!", "Chyba!");
+                }
+                    else MessageBox.Show("Musíš vyplniť všetky údaje!", "Chyba!");
             }
+             else MessageBox.Show("Musíš vyplniť všetky údaje!", "Chyba!");
         }
 
         // Osetrenie vstupu na tel. cislo a pin aby tam mohol uzivatel vlozit len cisla
 
         private void textBox_Registracia_Tel_Cislo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true;
         }
 
         private void textBox_Registracia_Pin_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) e.Handled = true;
         }
-
 
         // Placeholdery - registracia
 
@@ -322,7 +392,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         private void textBox_Registracia_Meno_Enter(object sender, EventArgs e)
         {
             if (textBox_Registracia_Meno.Text == "Meno")
-            { 
+            {
                 textBox_Registracia_Meno.Text = "";
                 textBox_Registracia_Meno.ForeColor = System.Drawing.Color.Black;
             }
@@ -340,7 +410,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void textBox_Registracia_Priezvisko_Click(object sender, EventArgs e)
         {
-            
+
             if (textBox_Registracia_Priezvisko.Text == "Priezvisko")
             {
                 textBox_Registracia_Priezvisko.Text = "";
@@ -470,8 +540,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
         private void textBox_Registracia_Pin_Leave(object sender, EventArgs e)
         {
             if (textBox_Registracia_Pin.Text == "")
-            { 
-            textBox_Registracia_Pin.Text = "Pin";
+            {
+                textBox_Registracia_Pin.Text = "Pin";
                 textBox_Registracia_Pin.ForeColor = System.Drawing.Color.Gray;
             }
         }
@@ -492,7 +562,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         }
 
         private void textBox_Login_Email_Enter(object sender, EventArgs e)
-        { 
+        {
             if (textBox_Login_Email.Text == "E-mail")
             {
                 textBox_Login_Email.Text = "";
@@ -548,6 +618,37 @@ namespace p65_72_Zifcak_Ondra_Michlik
         private void Form_Login_Load(object sender, EventArgs e)
         {
 
+        }
+
+
+
+        // Osetrenie vstupov aby uzivatel nemohol zadat nerealne udaje 
+        // a zaroven aby sa udaje zmestili do danych textboxov 
+        private void textBox_Registracia_Meno_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (textBox_Registracia_Meno.Text.Length > 13)
+            { 
+                if(e.KeyCode != Keys.Back) e.SuppressKeyPress = true;
+            }
+            if(e.KeyCode == Keys.Enter) e.SuppressKeyPress = true;
+        }
+
+        private void textBox_Registracia_Priezvisko_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (textBox_Registracia_Priezvisko.Text.Length > 13)
+            {
+                if (e.KeyCode != Keys.Back) e.SuppressKeyPress = true;
+            }
+            if (e.KeyCode == Keys.Enter) e.SuppressKeyPress = true;
+        }
+
+        private void textBox_Registracia_Email_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (textBox_Registracia_Email.Text.Length > 31)
+            {
+                if (e.KeyCode != Keys.Back) e.SuppressKeyPress = true;
+            }
+            if (e.KeyCode == Keys.Enter) e.SuppressKeyPress = true;
         }
     }
 }

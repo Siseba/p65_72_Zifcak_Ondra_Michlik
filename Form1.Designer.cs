@@ -65,21 +65,19 @@
             this.panel_Registracia.Controls.Add(this.textBox_Registracia_Priezvisko);
             this.panel_Registracia.Controls.Add(this.textBox_Registracia_Meno);
             this.panel_Registracia.Location = new System.Drawing.Point(0, 0);
-            this.panel_Registracia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel_Registracia.Name = "panel_Registracia";
-            this.panel_Registracia.Size = new System.Drawing.Size(1888, 827);
+            this.panel_Registracia.Size = new System.Drawing.Size(1416, 672);
             this.panel_Registracia.TabIndex = 12;
             // 
             // textBox_Registracia_Pin
             // 
             this.textBox_Registracia_Pin.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Registracia_Pin.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Registracia_Pin.Location = new System.Drawing.Point(731, 306);
-            this.textBox_Registracia_Pin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_Registracia_Pin.Location = new System.Drawing.Point(548, 249);
             this.textBox_Registracia_Pin.MaxLength = 4;
             this.textBox_Registracia_Pin.Multiline = true;
             this.textBox_Registracia_Pin.Name = "textBox_Registracia_Pin";
-            this.textBox_Registracia_Pin.Size = new System.Drawing.Size(421, 57);
+            this.textBox_Registracia_Pin.Size = new System.Drawing.Size(316, 46);
             this.textBox_Registracia_Pin.TabIndex = 3;
             this.textBox_Registracia_Pin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Registracia_Pin.Click += new System.EventHandler(this.textBox_Registracia_Pin_Click);
@@ -90,10 +88,9 @@
             // pictureBox_Registracia_Register
             // 
             this.pictureBox_Registracia_Register.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Registracia_Register.Location = new System.Drawing.Point(705, 642);
-            this.pictureBox_Registracia_Register.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Registracia_Register.Location = new System.Drawing.Point(529, 522);
             this.pictureBox_Registracia_Register.Name = "pictureBox_Registracia_Register";
-            this.pictureBox_Registracia_Register.Size = new System.Drawing.Size(476, 89);
+            this.pictureBox_Registracia_Register.Size = new System.Drawing.Size(357, 72);
             this.pictureBox_Registracia_Register.TabIndex = 6;
             this.pictureBox_Registracia_Register.TabStop = false;
             this.pictureBox_Registracia_Register.Click += new System.EventHandler(this.pictureBox_Registracia_Register_Click);
@@ -101,10 +98,9 @@
             // pictureBox_Registracia_Cancel
             // 
             this.pictureBox_Registracia_Cancel.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Registracia_Cancel.Location = new System.Drawing.Point(164, 642);
-            this.pictureBox_Registracia_Cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Registracia_Cancel.Location = new System.Drawing.Point(123, 522);
             this.pictureBox_Registracia_Cancel.Name = "pictureBox_Registracia_Cancel";
-            this.pictureBox_Registracia_Cancel.Size = new System.Drawing.Size(471, 89);
+            this.pictureBox_Registracia_Cancel.Size = new System.Drawing.Size(353, 72);
             this.pictureBox_Registracia_Cancel.TabIndex = 5;
             this.pictureBox_Registracia_Cancel.TabStop = false;
             this.pictureBox_Registracia_Cancel.Click += new System.EventHandler(this.pictureBox_Registracia_Cancel_Click);
@@ -113,11 +109,10 @@
             // 
             this.textBox_Registracia_Adresa.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Registracia_Adresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Registracia_Adresa.Location = new System.Drawing.Point(188, 554);
-            this.textBox_Registracia_Adresa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_Registracia_Adresa.Location = new System.Drawing.Point(141, 450);
             this.textBox_Registracia_Adresa.Multiline = true;
             this.textBox_Registracia_Adresa.Name = "textBox_Registracia_Adresa";
-            this.textBox_Registracia_Adresa.Size = new System.Drawing.Size(964, 57);
+            this.textBox_Registracia_Adresa.Size = new System.Drawing.Size(723, 46);
             this.textBox_Registracia_Adresa.TabIndex = 5;
             this.textBox_Registracia_Adresa.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Registracia_Adresa.Click += new System.EventHandler(this.textBox_Registracia_Adresa_Click);
@@ -128,27 +123,26 @@
             // 
             this.textBox_Registracia_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Registracia_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Registracia_Email.Location = new System.Drawing.Point(188, 431);
-            this.textBox_Registracia_Email.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_Registracia_Email.Location = new System.Drawing.Point(141, 350);
             this.textBox_Registracia_Email.Multiline = true;
             this.textBox_Registracia_Email.Name = "textBox_Registracia_Email";
-            this.textBox_Registracia_Email.Size = new System.Drawing.Size(964, 57);
+            this.textBox_Registracia_Email.Size = new System.Drawing.Size(723, 46);
             this.textBox_Registracia_Email.TabIndex = 4;
             this.textBox_Registracia_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Registracia_Email.Click += new System.EventHandler(this.textBox_Registracia_Email_Click);
             this.textBox_Registracia_Email.Enter += new System.EventHandler(this.textBox_Registracia_Email_Enter);
+            this.textBox_Registracia_Email.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Registracia_Email_KeyDown);
             this.textBox_Registracia_Email.Leave += new System.EventHandler(this.textBox_Registracia_Email_Leave);
             // 
             // textBox_Registracia_Tel_Cislo
             // 
             this.textBox_Registracia_Tel_Cislo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Registracia_Tel_Cislo.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Registracia_Tel_Cislo.Location = new System.Drawing.Point(188, 306);
-            this.textBox_Registracia_Tel_Cislo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_Registracia_Tel_Cislo.Location = new System.Drawing.Point(141, 249);
             this.textBox_Registracia_Tel_Cislo.MaxLength = 10;
             this.textBox_Registracia_Tel_Cislo.Multiline = true;
             this.textBox_Registracia_Tel_Cislo.Name = "textBox_Registracia_Tel_Cislo";
-            this.textBox_Registracia_Tel_Cislo.Size = new System.Drawing.Size(421, 57);
+            this.textBox_Registracia_Tel_Cislo.Size = new System.Drawing.Size(316, 46);
             this.textBox_Registracia_Tel_Cislo.TabIndex = 2;
             this.textBox_Registracia_Tel_Cislo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Registracia_Tel_Cislo.Click += new System.EventHandler(this.textBox_Registracia_Tel_Cislo_Click);
@@ -160,30 +154,30 @@
             // 
             this.textBox_Registracia_Priezvisko.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Registracia_Priezvisko.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Registracia_Priezvisko.Location = new System.Drawing.Point(739, 185);
-            this.textBox_Registracia_Priezvisko.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_Registracia_Priezvisko.Location = new System.Drawing.Point(554, 150);
             this.textBox_Registracia_Priezvisko.Multiline = true;
             this.textBox_Registracia_Priezvisko.Name = "textBox_Registracia_Priezvisko";
-            this.textBox_Registracia_Priezvisko.Size = new System.Drawing.Size(413, 57);
+            this.textBox_Registracia_Priezvisko.Size = new System.Drawing.Size(310, 46);
             this.textBox_Registracia_Priezvisko.TabIndex = 1;
             this.textBox_Registracia_Priezvisko.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Registracia_Priezvisko.Click += new System.EventHandler(this.textBox_Registracia_Priezvisko_Click);
             this.textBox_Registracia_Priezvisko.Enter += new System.EventHandler(this.textBox_Registracia_Priezvisko_Enter);
+            this.textBox_Registracia_Priezvisko.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Registracia_Priezvisko_KeyDown);
             this.textBox_Registracia_Priezvisko.Leave += new System.EventHandler(this.textBox_Registracia_Priezvisko_Leave);
             // 
             // textBox_Registracia_Meno
             // 
             this.textBox_Registracia_Meno.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Registracia_Meno.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Registracia_Meno.Location = new System.Drawing.Point(188, 185);
-            this.textBox_Registracia_Meno.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox_Registracia_Meno.Location = new System.Drawing.Point(141, 150);
             this.textBox_Registracia_Meno.Multiline = true;
             this.textBox_Registracia_Meno.Name = "textBox_Registracia_Meno";
-            this.textBox_Registracia_Meno.Size = new System.Drawing.Size(421, 57);
+            this.textBox_Registracia_Meno.Size = new System.Drawing.Size(316, 46);
             this.textBox_Registracia_Meno.TabIndex = 0;
             this.textBox_Registracia_Meno.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Registracia_Meno.Click += new System.EventHandler(this.textBox_Registracia_Meno_Click);
             this.textBox_Registracia_Meno.Enter += new System.EventHandler(this.textBox_Registracia_Meno_Enter);
+            this.textBox_Registracia_Meno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_Registracia_Meno_KeyDown);
             this.textBox_Registracia_Meno.Leave += new System.EventHandler(this.textBox_Registracia_Meno_Leave);
             // 
             // panel_Login
@@ -195,21 +189,20 @@
             this.panel_Login.Controls.Add(this.pictureBox_Login);
             this.panel_Login.Controls.Add(this.pictureBox_Login_Close);
             this.panel_Login.Location = new System.Drawing.Point(0, 0);
-            this.panel_Login.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel_Login.Name = "panel_Login";
-            this.panel_Login.Size = new System.Drawing.Size(1888, 827);
+            this.panel_Login.Size = new System.Drawing.Size(1416, 672);
             this.panel_Login.TabIndex = 11;
             this.panel_Login.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Login_Paint);
             // 
             // textBox_Login_Email
             // 
             this.textBox_Login_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_Login_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Login_Email.Location = new System.Drawing.Point(228, 201);
-            this.textBox_Login_Email.Margin = new System.Windows.Forms.Padding(4, 6, 4, 4);
+            this.textBox_Login_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox_Login_Email.Location = new System.Drawing.Point(171, 163);
+            this.textBox_Login_Email.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.textBox_Login_Email.Multiline = true;
             this.textBox_Login_Email.Name = "textBox_Login_Email";
-            this.textBox_Login_Email.Size = new System.Drawing.Size(556, 74);
+            this.textBox_Login_Email.Size = new System.Drawing.Size(417, 60);
             this.textBox_Login_Email.TabIndex = 0;
             this.textBox_Login_Email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Login_Email.Click += new System.EventHandler(this.textBox_Login_Email_Click);
@@ -219,10 +212,9 @@
             // pictureBox_Login_Register
             // 
             this.pictureBox_Login_Register.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Login_Register.Location = new System.Drawing.Point(208, 638);
-            this.pictureBox_Login_Register.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Login_Register.Location = new System.Drawing.Point(156, 518);
             this.pictureBox_Login_Register.Name = "pictureBox_Login_Register";
-            this.pictureBox_Login_Register.Size = new System.Drawing.Size(608, 107);
+            this.pictureBox_Login_Register.Size = new System.Drawing.Size(456, 87);
             this.pictureBox_Login_Register.TabIndex = 10;
             this.pictureBox_Login_Register.TabStop = false;
             this.pictureBox_Login_Register.Click += new System.EventHandler(this.pictureBox_Login_Register_Click);
@@ -231,12 +223,12 @@
             // 
             this.textBox_Login_Pin.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Login_Pin.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Login_Pin.Location = new System.Drawing.Point(228, 356);
-            this.textBox_Login_Pin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 4);
+            this.textBox_Login_Pin.Location = new System.Drawing.Point(171, 289);
+            this.textBox_Login_Pin.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.textBox_Login_Pin.MaxLength = 4;
             this.textBox_Login_Pin.Multiline = true;
             this.textBox_Login_Pin.Name = "textBox_Login_Pin";
-            this.textBox_Login_Pin.Size = new System.Drawing.Size(556, 74);
+            this.textBox_Login_Pin.Size = new System.Drawing.Size(417, 60);
             this.textBox_Login_Pin.TabIndex = 1;
             this.textBox_Login_Pin.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox_Login_Pin.Click += new System.EventHandler(this.textBox_Login_Pin_Click);
@@ -247,10 +239,9 @@
             // 
             this.pictureBox_Login.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox_Login.ErrorImage = null;
-            this.pictureBox_Login.Location = new System.Drawing.Point(208, 496);
-            this.pictureBox_Login.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Login.Location = new System.Drawing.Point(156, 403);
             this.pictureBox_Login.Name = "pictureBox_Login";
-            this.pictureBox_Login.Size = new System.Drawing.Size(300, 127);
+            this.pictureBox_Login.Size = new System.Drawing.Size(225, 103);
             this.pictureBox_Login.TabIndex = 8;
             this.pictureBox_Login.TabStop = false;
             this.pictureBox_Login.Click += new System.EventHandler(this.pictureBox_Login_Click);
@@ -258,23 +249,21 @@
             // pictureBox_Login_Close
             // 
             this.pictureBox_Login_Close.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Login_Close.Location = new System.Drawing.Point(516, 496);
-            this.pictureBox_Login_Close.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Login_Close.Location = new System.Drawing.Point(387, 403);
             this.pictureBox_Login_Close.Name = "pictureBox_Login_Close";
-            this.pictureBox_Login_Close.Size = new System.Drawing.Size(300, 127);
+            this.pictureBox_Login_Close.Size = new System.Drawing.Size(225, 103);
             this.pictureBox_Login_Close.TabIndex = 9;
             this.pictureBox_Login_Close.TabStop = false;
             this.pictureBox_Login_Close.Click += new System.EventHandler(this.pictureBox_Login_Close_Click);
             // 
             // Form_Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_ciste;
-            this.ClientSize = new System.Drawing.Size(1888, 827);
+            this.ClientSize = new System.Drawing.Size(1416, 672);
             this.Controls.Add(this.panel_Login);
             this.Controls.Add(this.panel_Registracia);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form_Login";
             this.Text = "ATM Prihlásenie";
             this.Load += new System.EventHandler(this.Form_Login_Load);
