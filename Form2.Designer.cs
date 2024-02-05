@@ -240,7 +240,7 @@
             this.pictureBox_Vklad_Vykonat.Size = new System.Drawing.Size(735, 109);
             this.pictureBox_Vklad_Vykonat.TabIndex = 3;
             this.pictureBox_Vklad_Vykonat.TabStop = false;
-            this.pictureBox_Vklad_Vykonat.Click += new System.EventHandler(this.pictureBox_Vklad_Vykonat_Click);
+            //this.pictureBox_Vklad_Vykonat.Click += new System.EventHandler(this.pictureBox_Vklad_Vykonat_Click);
             // 
             // label_Vklad_Stav_Uctu
             // 

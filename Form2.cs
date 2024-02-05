@@ -170,6 +170,9 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Domov.Enabled = true;
         }
 
+        // Docastne riesenie aby som mohol spustit program!!!!!!!!!!!  :D
+        string transactions_subor = "";
+
         private void pictureBox_Prevod_Odoslat_Click_1(object sender, EventArgs e)
         {
             string cisloUctuPrijimatela = textBox_Prevod_Cislo_Prijemcu.Text;

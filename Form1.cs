@@ -12,6 +12,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace p65_72_Zifcak_Ondra_Michlik
 {
@@ -135,7 +137,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 string email = hodnoty[6].Trim().ToLower();
                 string pin = hodnoty[4].Trim().ToLower();
 
-                if (email == textBox_Login_Email.Text && pin == textBox_Login_Pin.Text)
+                if (email == textBox_Login_Email.Text && pin == pinEncryption(textBox_Login_Pin.Text).ToLower())
                 {
                     idPrihlasenehoPouzivatela = hodnoty[0];
                     this.Hide();
@@ -192,6 +194,32 @@ namespace p65_72_Zifcak_Ondra_Michlik
             if (pin.Length == 4) return true;
             else return false;
         }
+
+        // Jednoducha funkcia na zahashovanie pinu v csv subore
+        // Zdroj: https://www.sean-lloyd.com/post/hash-a-string/
+
+        private string pinEncryption(string pin, string salt = "") { 
+            
+            if(String.IsNullOrEmpty(pin)) return String.Empty;
+
+            // Pouzite SHA256 na zasifrovanie stringu 
+
+            using (var sha = new System.Security.Cryptography.SHA256Managed())
+            {
+
+                // Prevedenie pinu na pole typu bajt 
+                byte[] textBytes = System.Text.Encoding.UTF8.GetBytes(pin);
+                byte[] hashBytes = sha.ComputeHash(textBytes);
+
+                // Prevedenie spat na string + odstranenie "-" a ";" ktore prida funkcia BitConverter
+                string hash = BitConverter.ToString(hashBytes).Replace("-", String.Empty).Replace(";", String.Empty);
+
+                return hash;
+
+            }
+
+        }
+
 
         // Funkcia na osetrenie vstupu emailu
 
@@ -265,9 +293,11 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
                 string pin = textBox_Registracia_Pin.Text;
 
+                string pinHash = pinEncryption(pin);
+
                 StreamWriter users = new StreamWriter(users_subor, true, Encoding.UTF8);
 
-                string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko, pin, telefonne_cislo, email, adresa_cast, mesto_cast, stav_uctu);
+                string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko, pinHash, telefonne_cislo, email, adresa_cast, mesto_cast, stav_uctu);
                 users.WriteLine(udaje_na_zapis);
 
                 users.Flush();
