@@ -102,7 +102,7 @@
             this.panel_Domov.Controls.Add(this.pictureBox_Vyber);
             this.panel_Domov.Controls.Add(this.pictureBox_Vklad);
             this.panel_Domov.Controls.Add(this.pictureBox_Profil);
-            this.panel_Domov.Location = new System.Drawing.Point(0, 0);
+            this.panel_Domov.Location = new System.Drawing.Point(1000, 400);
             this.panel_Domov.Name = "panel_Domov";
             this.panel_Domov.Size = new System.Drawing.Size(1416, 672);
             this.panel_Domov.TabIndex = 0;
@@ -240,6 +240,7 @@
             this.pictureBox_Vklad_Vykonat.Size = new System.Drawing.Size(735, 109);
             this.pictureBox_Vklad_Vykonat.TabIndex = 3;
             this.pictureBox_Vklad_Vykonat.TabStop = false;
+            this.pictureBox_Vklad_Vykonat.Click += new System.EventHandler(this.pictureBox_Vklad_Vykonat_Click);
             // 
             // label_Vklad_Stav_Uctu
             // 

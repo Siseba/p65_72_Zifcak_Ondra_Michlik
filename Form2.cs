@@ -23,7 +23,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
         Random rand = new Random();
 
         string users_subor = "users.csv";
-        string transactions_subor = "transactions.csv";
         public double stavUctuPouzivatela;
         public string cisloUctuPouzivatela;
 
@@ -81,6 +80,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Vklad.Visible = true;
             panel_Vklad.Enabled = true;
             panel_Domov.Enabled = false;
+
         }
 
         private void pictureBox_Vklad_Spat_Click(object sender, EventArgs e)
