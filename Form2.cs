@@ -18,6 +18,11 @@ namespace p65_72_Zifcak_Ondra_Michlik
         string idPouzivatela = Form_Login.idPrihlasenehoPouzivatela;
 
         string users_subor = "users.csv";
+        string financie_subor = "financie.csv";
+
+        Random rand = new Random();
+
+
         public double stavUctuPouzivatela;
 
         public Form_Domov()
@@ -73,6 +78,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Vklad.Visible = true;
             panel_Vklad.Enabled = true;
             panel_Domov.Enabled = false;
+
         }
 
         private void pictureBox_Vklad_Spat_Click(object sender, EventArgs e)
@@ -160,6 +166,32 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Profil.Visible = false;
             panel_Profil.Enabled = false;
             panel_Domov.Enabled = true;
+        }
+
+        private void pictureBox_Vklad_Vykonat_Click(object sender, EventArgs e)
+        {
+
+            //generovanie ID tranzakcie s aktuálnym dátumom 
+            int id_tranzakcie = rand.Next(100000, 1000000);
+            string id_osoba = idPouzivatela;
+
+            string suma = textBox_Vklad.Text;
+            int stavUctuPouzivatela = Convert.ToInt32(suma);
+            
+            //pomoc ChatGPT
+            string zapis = $"{id_tranzakcie},{id_osoba},vklad,{suma},{DateTime.Now:dd.MM.yyyy}";
+
+
+            // Zápis do súboru
+            StreamWriter finance = new StreamWriter(financie_subor, true, Encoding.UTF8);
+            finance.WriteLine(zapis);
+            finance.Close();
+
+            // ošetrenie po zápise vkladu
+            textBox_Vklad.Text = "";
+
+            //oznámenie o vykonanom vklade
+            MessageBox.Show("Vklad bol zaznamenaný.");
         }
     }
 }

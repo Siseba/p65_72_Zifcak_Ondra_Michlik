@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel_Profil = new System.Windows.Forms.Panel();
+            this.pictureBox_Profil_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Domov = new System.Windows.Forms.Panel();
             this.pictureBox_Odhlasenie = new System.Windows.Forms.PictureBox();
             this.pictureBox_Vypis_Uctu = new System.Windows.Forms.PictureBox();
@@ -53,8 +54,8 @@
             this.textBox_Prevod_Suma = new System.Windows.Forms.TextBox();
             this.textBox_Prevod_Cislo_Odosielatel = new System.Windows.Forms.TextBox();
             this.pictureBox_Prevod_Spat = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Profil_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Profil.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).BeginInit();
             this.panel_Domov.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Odhlasenie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Uctu)).BeginInit();
@@ -71,7 +72,6 @@
             this.panel_Prevod_Na_Ucet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Odoslat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Spat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Profil
@@ -83,6 +83,16 @@
             this.panel_Profil.Size = new System.Drawing.Size(1416, 672);
             this.panel_Profil.TabIndex = 4;
             // 
+            // pictureBox_Profil_Spat
+            // 
+            this.pictureBox_Profil_Spat.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_Profil_Spat.Location = new System.Drawing.Point(38, 31);
+            this.pictureBox_Profil_Spat.Name = "pictureBox_Profil_Spat";
+            this.pictureBox_Profil_Spat.Size = new System.Drawing.Size(80, 53);
+            this.pictureBox_Profil_Spat.TabIndex = 0;
+            this.pictureBox_Profil_Spat.TabStop = false;
+            this.pictureBox_Profil_Spat.Click += new System.EventHandler(this.pictureBox_Profil_Spat_Click);
+            // 
             // panel_Domov
             // 
             this.panel_Domov.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_domovska_plocha;
@@ -92,7 +102,7 @@
             this.panel_Domov.Controls.Add(this.pictureBox_Vyber);
             this.panel_Domov.Controls.Add(this.pictureBox_Vklad);
             this.panel_Domov.Controls.Add(this.pictureBox_Profil);
-            this.panel_Domov.Location = new System.Drawing.Point(0, 0);
+            this.panel_Domov.Location = new System.Drawing.Point(1000, 400);
             this.panel_Domov.Name = "panel_Domov";
             this.panel_Domov.Size = new System.Drawing.Size(1416, 672);
             this.panel_Domov.TabIndex = 0;
@@ -230,6 +240,7 @@
             this.pictureBox_Vklad_Vykonat.Size = new System.Drawing.Size(735, 109);
             this.pictureBox_Vklad_Vykonat.TabIndex = 3;
             this.pictureBox_Vklad_Vykonat.TabStop = false;
+            this.pictureBox_Vklad_Vykonat.Click += new System.EventHandler(this.pictureBox_Vklad_Vykonat_Click);
             // 
             // label_Vklad_Stav_Uctu
             // 
@@ -342,16 +353,6 @@
             this.pictureBox_Prevod_Spat.TabStop = false;
             this.pictureBox_Prevod_Spat.Click += new System.EventHandler(this.pictureBox_Prevod_Spat_Click);
             // 
-            // pictureBox_Profil_Spat
-            // 
-            this.pictureBox_Profil_Spat.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Profil_Spat.Location = new System.Drawing.Point(38, 31);
-            this.pictureBox_Profil_Spat.Name = "pictureBox_Profil_Spat";
-            this.pictureBox_Profil_Spat.Size = new System.Drawing.Size(80, 53);
-            this.pictureBox_Profil_Spat.TabIndex = 0;
-            this.pictureBox_Profil_Spat.TabStop = false;
-            this.pictureBox_Profil_Spat.Click += new System.EventHandler(this.pictureBox_Profil_Spat_Click);
-            // 
             // Form_Domov
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,6 +366,7 @@
             this.Name = "Form_Domov";
             this.Text = "Domov";
             this.panel_Profil.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).EndInit();
             this.panel_Domov.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Odhlasenie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Uctu)).EndInit();
@@ -384,7 +386,6 @@
             this.panel_Prevod_Na_Ucet.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Odoslat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Spat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).EndInit();
             this.ResumeLayout(false);
 
         }
