@@ -23,6 +23,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
         Random rand = new Random();
 
         string users_subor = "users.csv";
+        string transactions_subor = "transactions.csv";
+        string financie_subor = "financie.csv";
         public double stavUctuPouzivatela;
         public string cisloUctuPouzivatela;
 
@@ -99,7 +101,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             this.Text = "Vyber";
 
             zistenieStavuUctu_cislaUctu();
-            label_Vyber_Stav_Uctu.Text = "Stav účtu:" + stavUctuPouzivatela.ToString() + "€";
+            label_Vyber_Stav_Uctu.Text = "Stav účtu: " + stavUctuPouzivatela.ToString() + "€";
             textBox_Vyber.Text = "";
             panel_Domov.Visible = false;
             panel_Vyber.Visible = true;
@@ -170,38 +172,116 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Domov.Enabled = true;
         }
 
-        // Docastne riesenie aby som mohol spustit program!!!!!!!!!!!  :D
-        string transactions_subor = "";
+        private void zapisDoSubora(string[] usersFileLine)
+        {
+            StreamWriter users_users = new StreamWriter(users_subor, false);
+            for (int j = 0; j < usersFileLine.Length - 1; j++)
+            {
+                users_users.WriteLine(usersFileLine[j]);
+            }
+            users_users.Close();
+        }
 
         private void pictureBox_Prevod_Odoslat_Click_1(object sender, EventArgs e)
         {
             string cisloUctuPrijimatela = textBox_Prevod_Cislo_Prijemcu.Text;
             double sumaPrevod = Convert.ToDouble(textBox_Prevod_Suma.Text);
 
-            StreamWriter transactions_file = new StreamWriter(transactions_subor);
+            StreamReader users_file = new StreamReader(users_subor, Encoding.UTF8);
+            string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
+            users_file.Close();
 
-            int id = rand.Next(1000, 10000);
-            string idOsoba = idPouzivatela;
-            string odosielatel = cisloUctuPouzivatela;
-            string prijimatel = cisloUctuPrijimatela;
-            string suma = textBox_Prevod_Suma.Text;
+            for (int i = 0; i < usersFileLine.Length - 1; i++)
+            {
+                string line = usersFileLine[i];
+                string[] lineKusy = line.Split(';');
+                string hladaneId = lineKusy[0];
+                double stavUctu = Convert.ToDouble(lineKusy[9]);
+                if (hladaneId == idPouzivatela)
+                {
+                    if (!((stavUctu - sumaPrevod) < 0))
+                    {
+                        stavUctu -= sumaPrevod;
+                        usersFileLine[i].Split(';')[9] = Convert.ToString(stavUctu);
 
-            DateTime dateAndTime = DateTime.Now;
-            string datum = dateAndTime.ToString("dd.MM.yyyy");
+                        zapisDoSubora(usersFileLine);
 
-            string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5}", id, idOsoba, odosielatel, prijimatel, suma, datum);
-            transactions_file.WriteLine(udaje_na_zapis);
+                        StreamWriter transactions_file = new StreamWriter(transactions_subor, true, Encoding.UTF8);
 
-            textBox_Prevod_Cislo_Prijemcu.Text = "";
-            textBox_Prevod_Suma.Text = "";
+                        int id = rand.Next(1000, 10000);
+                        string idOsoba = idPouzivatela;
+                        string odosielatel = cisloUctuPouzivatela;
+                        string prijimatel = cisloUctuPrijimatela;
+                        string suma = textBox_Prevod_Suma.Text;
 
-            MessageBox.Show("Transakcia prebehla úspešne!!!");
+                        DateTime dateAndTime = DateTime.Now;
+                        string datum = dateAndTime.ToString("dd.MM.yyyy");
 
-            transactions_file.Close();
+                        string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5}", id, idOsoba, odosielatel, prijimatel, suma, datum);
+                        transactions_file.WriteLine(udaje_na_zapis);
+
+                        textBox_Prevod_Cislo_Prijemcu.Text = "";
+                        textBox_Prevod_Suma.Text = "";
+
+                        MessageBox.Show("Transakcia prebehla úspešne!!!");
+
+                        transactions_file.Close();
+
+                        break;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nemáte dostatok financií na prevod!");
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        private void pictureBox_Vklad_Vykonat_Click(object sender, EventArgs e)
+        {
+
+            //generovanie ID tranzakcie s aktuálnym dátumom 
+            int id_tranzakcie = rand.Next(100000, 1000000);
+            string id_osoba = idPouzivatela;
+
+            string suma = textBox_Vklad.Text;
 
             StreamReader users_file = new StreamReader(users_subor, Encoding.UTF8);
             string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
-            MessageBox.Show(usersFileLine[0]);
+            users_file.Close();
+
+            for (int i = 0; i < usersFileLine.Length - 1; i++)
+            {
+                string line = usersFileLine[i];
+                string[] lineKusy = line.Split(';');
+                string hladaneId = lineKusy[0];
+                double stavUctu = Convert.ToDouble(lineKusy[9]);
+                if (hladaneId == idPouzivatela)
+                {
+                    stavUctu += Convert.ToInt32(suma);
+                    usersFileLine[i].Split(';')[9] = Convert.ToString(stavUctu);
+
+                    zapisDoSubora(usersFileLine);
+
+                    //pomoc ChatGPT
+                    string zapis = $"{id_tranzakcie},{id_osoba},vklad,{suma},{DateTime.Now:dd.MM.yyyy}";
+
+                    // Zápis do súboru
+                    StreamWriter finance = new StreamWriter(financie_subor, true, Encoding.UTF8);
+                    finance.WriteLine(zapis);
+                    finance.Close();
+
+                    break;
+                }
+            }
+
+            // ošetrenie po zápise vkladu
+            textBox_Vklad.Text = "";
+
+            //oznámenie o vykonanom vklade
+            MessageBox.Show("Vklad bol zaznamenaný.");
         }
     }
 }
