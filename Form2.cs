@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Net.Http.Headers;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace p65_72_Zifcak_Ondra_Michlik
 {
@@ -17,8 +20,12 @@ namespace p65_72_Zifcak_Ondra_Michlik
     {
         string idPouzivatela = Form_Login.idPrihlasenehoPouzivatela;
 
+        Random rand = new Random();
+
         string users_subor = "users.csv";
+        string transactions_subor = "transactions.csv";
         public double stavUctuPouzivatela;
+        public string cisloUctuPouzivatela;
 
         public Form_Domov()
         {
@@ -49,13 +56,14 @@ namespace p65_72_Zifcak_Ondra_Michlik
             this.Close();
         }
 
-        private void zistenieStavuUctu() { 
+        private void zistenieStavuUctu_cislaUctu() { 
             StreamReader udaje = new StreamReader(users_subor,Encoding.UTF8);
             string riadok;
             while((riadok = udaje.ReadLine()) != null) {
                 string[] hodnoty = riadok.Split(';');
                 if (hodnoty[0].Trim().ToLower() == idPouzivatela.ToString().ToLower()) {
                     stavUctuPouzivatela = Convert.ToDouble(hodnoty[9]);
+                    cisloUctuPouzivatela = Convert.ToString(hodnoty[1]);
                 }
             }
             udaje.Close();
@@ -63,7 +71,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Vklad_Click(object sender, EventArgs e)
         {
-            zistenieStavuUctu();
+            zistenieStavuUctu_cislaUctu();
 
             this.Text = "Vklad";
 
@@ -90,7 +98,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         {
             this.Text = "Vyber";
 
-            zistenieStavuUctu();
+            zistenieStavuUctu_cislaUctu();
             label_Vyber_Stav_Uctu.Text = "Stav účtu:" + stavUctuPouzivatela.ToString() + "€";
             textBox_Vyber.Text = "";
             panel_Domov.Visible = false;
@@ -112,13 +120,13 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Prevod_Na_Ucet_Click(object sender, EventArgs e)
         {
-            zistenieStavuUctu();
+            zistenieStavuUctu_cislaUctu();
 
             this.Text = "Prevod";
 
             label_Prevod_Stav_Uctu.Text = "Stav účtu:" + stavUctuPouzivatela.ToString() + "€";
 
-            textBox_Prevod_Cislo_Odosielatel.Text = "";
+            textBox_Prevod_Cislo_Odosielatel.Text = cisloUctuPouzivatela;
             textBox_Prevod_Cislo_Prijemcu.Text = "";
             textBox_Prevod_Suma.Text = "";
 
@@ -160,6 +168,37 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Profil.Visible = false;
             panel_Profil.Enabled = false;
             panel_Domov.Enabled = true;
+        }
+
+        private void pictureBox_Prevod_Odoslat_Click_1(object sender, EventArgs e)
+        {
+            string cisloUctuPrijimatela = textBox_Prevod_Cislo_Prijemcu.Text;
+            double sumaPrevod = Convert.ToDouble(textBox_Prevod_Suma.Text);
+
+            StreamWriter transactions_file = new StreamWriter(transactions_subor);
+
+            int id = rand.Next(1000, 10000);
+            string idOsoba = idPouzivatela;
+            string odosielatel = cisloUctuPouzivatela;
+            string prijimatel = cisloUctuPrijimatela;
+            string suma = textBox_Prevod_Suma.Text;
+
+            DateTime dateAndTime = DateTime.Now;
+            string datum = dateAndTime.ToString("dd.MM.yyyy");
+
+            string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5}", id, idOsoba, odosielatel, prijimatel, suma, datum);
+            transactions_file.WriteLine(udaje_na_zapis);
+
+            textBox_Prevod_Cislo_Prijemcu.Text = "";
+            textBox_Prevod_Suma.Text = "";
+
+            MessageBox.Show("Transakcia prebehla úspešne!!!");
+
+            transactions_file.Close();
+
+            StreamReader users_file = new StreamReader(users_subor, Encoding.UTF8);
+            string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
+            MessageBox.Show(usersFileLine[0]);
         }
     }
 }

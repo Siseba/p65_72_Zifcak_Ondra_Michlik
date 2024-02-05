@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel_Profil = new System.Windows.Forms.Panel();
+            this.pictureBox_Profil_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Domov = new System.Windows.Forms.Panel();
             this.pictureBox_Odhlasenie = new System.Windows.Forms.PictureBox();
             this.pictureBox_Vypis_Uctu = new System.Windows.Forms.PictureBox();
@@ -53,8 +54,8 @@
             this.textBox_Prevod_Suma = new System.Windows.Forms.TextBox();
             this.textBox_Prevod_Cislo_Odosielatel = new System.Windows.Forms.TextBox();
             this.pictureBox_Prevod_Spat = new System.Windows.Forms.PictureBox();
-            this.pictureBox_Profil_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Profil.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).BeginInit();
             this.panel_Domov.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Odhlasenie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Uctu)).BeginInit();
@@ -71,7 +72,6 @@
             this.panel_Prevod_Na_Ucet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Odoslat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Spat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Profil
@@ -82,6 +82,16 @@
             this.panel_Profil.Name = "panel_Profil";
             this.panel_Profil.Size = new System.Drawing.Size(1416, 672);
             this.panel_Profil.TabIndex = 4;
+            // 
+            // pictureBox_Profil_Spat
+            // 
+            this.pictureBox_Profil_Spat.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_Profil_Spat.Location = new System.Drawing.Point(38, 31);
+            this.pictureBox_Profil_Spat.Name = "pictureBox_Profil_Spat";
+            this.pictureBox_Profil_Spat.Size = new System.Drawing.Size(80, 53);
+            this.pictureBox_Profil_Spat.TabIndex = 0;
+            this.pictureBox_Profil_Spat.TabStop = false;
+            this.pictureBox_Profil_Spat.Click += new System.EventHandler(this.pictureBox_Profil_Spat_Click);
             // 
             // panel_Domov
             // 
@@ -298,15 +308,17 @@
             this.pictureBox_Prevod_Odoslat.Size = new System.Drawing.Size(571, 102);
             this.pictureBox_Prevod_Odoslat.TabIndex = 4;
             this.pictureBox_Prevod_Odoslat.TabStop = false;
+            this.pictureBox_Prevod_Odoslat.Click += new System.EventHandler(this.pictureBox_Prevod_Odoslat_Click_1);
             // 
             // textBox_Prevod_Cislo_Prijemcu
             // 
             this.textBox_Prevod_Cislo_Prijemcu.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Prevod_Cislo_Prijemcu.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Prevod_Cislo_Prijemcu.Location = new System.Drawing.Point(832, 304);
+            this.textBox_Prevod_Cislo_Prijemcu.Location = new System.Drawing.Point(815, 304);
+            this.textBox_Prevod_Cislo_Prijemcu.MaxLength = 24;
             this.textBox_Prevod_Cislo_Prijemcu.Multiline = true;
             this.textBox_Prevod_Cislo_Prijemcu.Name = "textBox_Prevod_Cislo_Prijemcu";
-            this.textBox_Prevod_Cislo_Prijemcu.Size = new System.Drawing.Size(510, 60);
+            this.textBox_Prevod_Cislo_Prijemcu.Size = new System.Drawing.Size(545, 60);
             this.textBox_Prevod_Cislo_Prijemcu.TabIndex = 3;
             this.textBox_Prevod_Cislo_Prijemcu.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -326,6 +338,7 @@
             this.textBox_Prevod_Cislo_Odosielatel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Prevod_Cislo_Odosielatel.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox_Prevod_Cislo_Odosielatel.Location = new System.Drawing.Point(108, 191);
+            this.textBox_Prevod_Cislo_Odosielatel.MaxLength = 24;
             this.textBox_Prevod_Cislo_Odosielatel.Multiline = true;
             this.textBox_Prevod_Cislo_Odosielatel.Name = "textBox_Prevod_Cislo_Odosielatel";
             this.textBox_Prevod_Cislo_Odosielatel.Size = new System.Drawing.Size(520, 60);
@@ -342,16 +355,6 @@
             this.pictureBox_Prevod_Spat.TabStop = false;
             this.pictureBox_Prevod_Spat.Click += new System.EventHandler(this.pictureBox_Prevod_Spat_Click);
             // 
-            // pictureBox_Profil_Spat
-            // 
-            this.pictureBox_Profil_Spat.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Profil_Spat.Location = new System.Drawing.Point(38, 31);
-            this.pictureBox_Profil_Spat.Name = "pictureBox_Profil_Spat";
-            this.pictureBox_Profil_Spat.Size = new System.Drawing.Size(80, 53);
-            this.pictureBox_Profil_Spat.TabIndex = 0;
-            this.pictureBox_Profil_Spat.TabStop = false;
-            this.pictureBox_Profil_Spat.Click += new System.EventHandler(this.pictureBox_Profil_Spat_Click);
-            // 
             // Form_Domov
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,6 +368,7 @@
             this.Name = "Form_Domov";
             this.Text = "Domov";
             this.panel_Profil.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).EndInit();
             this.panel_Domov.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Odhlasenie)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Uctu)).EndInit();
@@ -384,7 +388,6 @@
             this.panel_Prevod_Na_Ucet.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Odoslat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Spat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).EndInit();
             this.ResumeLayout(false);
 
         }
