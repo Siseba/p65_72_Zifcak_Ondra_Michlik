@@ -125,5 +125,17 @@
   <ItemGroup>
     <None Include="Resources\pozadie_profil.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_vklad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_prevod_na_ucet1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_profil1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_vyber.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

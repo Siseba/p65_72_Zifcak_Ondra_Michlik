@@ -263,6 +263,9 @@
             this.ClientSize = new System.Drawing.Size(1416, 672);
             this.Controls.Add(this.panel_Login);
             this.Controls.Add(this.panel_Registracia);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form_Login";
             this.Text = "ATM Prihlásenie";
             this.panel_Registracia.ResumeLayout(false);

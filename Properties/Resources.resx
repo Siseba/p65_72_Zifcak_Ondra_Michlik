@@ -125,24 +125,24 @@
     <value>..\Resources\pozadie_domovska_plocha.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pozadie_prevod_na_ucet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pozadie_prevod_na_ucet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pozadie_ciste1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pozadie_ciste1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="vklad_pozadie" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vklad_pozadie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\pozadie_prevod_na_ucet1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pozadie_login_fix" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pozadie_login_fix.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="vyber_pozadie" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vyber_pozadie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pozadie_ciste1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pozadie_ciste1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pozadie_profil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pozadie_profil1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pozadie_vklad" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pozadie_vklad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pozadie_registracia_fix_aj_pin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pozadie_registracia_fix_aj_pin1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pozadie_profil" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pozadie_profil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pozadie_vyber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pozadie_vyber.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
