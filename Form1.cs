@@ -25,7 +25,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         Random rand = new Random();
 
-        string users_subor = "users.csv";
+        string users_subor = "users2.csv";
+        string users_stavUstu_subor = "users_stavUctu.csv";
 
         List<string> zaregistrovane_cisla = new List<string>();
         List<string> zaregistrovane_emaily = new List<string>();
@@ -127,7 +128,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Login_Click(object sender, EventArgs e)
         {
-            StreamReader users = new StreamReader("users.csv", Encoding.UTF8);
+            StreamReader users = new StreamReader(users_subor, Encoding.UTF8);
 
             string riadok;
             while ((riadok = users.ReadLine()) != null)
@@ -146,6 +147,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                     this.Close();
                 }
             }
+            users.Close();
             MessageBox.Show("Zadal si nespravne udaje!");
         }
 
@@ -297,11 +299,16 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
                 StreamWriter users = new StreamWriter(users_subor, true, Encoding.UTF8);
 
-                string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8};{9}", id, cislo_uctu, meno, priezvisko, pinHash, telefonne_cislo, email, adresa_cast, mesto_cast, stav_uctu);
+                string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8}", id, cislo_uctu, meno, priezvisko, pinHash, telefonne_cislo, email, adresa_cast, mesto_cast);
                 users.WriteLine(udaje_na_zapis);
 
                 users.Flush();
                 users.Close();
+
+                StreamWriter users_stavUctu = new StreamWriter(users_stavUstu_subor, true, Encoding.UTF8);
+                udaje_na_zapis = string.Format("{0};{1}", id, stav_uctu);
+                users_stavUctu.WriteLine(udaje_na_zapis);
+                users_stavUctu.Close();
 
                 // Vycistenie registracneho formularu po uspesnej registracii
 

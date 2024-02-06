@@ -10,9 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Net.Http.Headers;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace p65_72_Zifcak_Ondra_Michlik
 {
@@ -22,9 +19,10 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         Random rand = new Random();
 
-        string users_subor = "users.csv";
+        string users_subor = "users2.csv";
         string transactions_subor = "transactions.csv";
         string financie_subor = "financie.csv";
+        string users_stavUctu_subor = "users_stavUctu.csv";
         public double stavUctuPouzivatela;
         public string cisloUctuPouzivatela;
 
@@ -57,14 +55,28 @@ namespace p65_72_Zifcak_Ondra_Michlik
             this.Close();
         }
 
-        private void zistenieStavuUctu_cislaUctu() { 
-            StreamReader udaje = new StreamReader(users_subor,Encoding.UTF8);
+        private void zistenieCislaUctu()
+        {
+            StreamReader udajeStavUctu = new StreamReader(users_subor, Encoding.UTF8);
+            string riadok;
+            while ((riadok = udajeStavUctu.ReadLine()) != null)
+            {
+                string[] hodnoty = riadok.Split(';');
+                if (hodnoty[0].Trim().ToLower() == idPouzivatela.ToString().ToLower())
+                {
+                    cisloUctuPouzivatela = Convert.ToString(hodnoty[1]);
+                }
+            }
+            udajeStavUctu.Close();
+        }
+
+        private void zistenieStavuUctu() { 
+            StreamReader udaje = new StreamReader(users_stavUctu_subor, Encoding.UTF8);
             string riadok;
             while((riadok = udaje.ReadLine()) != null) {
                 string[] hodnoty = riadok.Split(';');
                 if (hodnoty[0].Trim().ToLower() == idPouzivatela.ToString().ToLower()) {
-                    stavUctuPouzivatela = Convert.ToDouble(hodnoty[9]);
-                    cisloUctuPouzivatela = Convert.ToString(hodnoty[1]);
+                    stavUctuPouzivatela = Convert.ToDouble(hodnoty[1]);
                 }
             }
             udaje.Close();
@@ -72,7 +84,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Vklad_Click(object sender, EventArgs e)
         {
-            zistenieStavuUctu_cislaUctu();
+            zistenieStavuUctu();
 
             this.Text = "Vklad";
 
@@ -100,7 +112,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         {
             this.Text = "Vyber";
 
-            zistenieStavuUctu_cislaUctu();
+            zistenieStavuUctu();
             label_Vyber_Stav_Uctu.Text = "Stav účtu: " + stavUctuPouzivatela.ToString() + "€";
             textBox_Vyber.Text = "";
             panel_Domov.Visible = false;
@@ -122,7 +134,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Prevod_Na_Ucet_Click(object sender, EventArgs e)
         {
-            zistenieStavuUctu_cislaUctu();
+            zistenieStavuUctu();
+            zistenieCislaUctu();
 
             this.Text = "Prevod";
 
@@ -174,12 +187,13 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void zapisDoSubora(string[] usersFileLine)
         {
-            StreamWriter users_users = new StreamWriter(users_subor, false);
-            for (int j = 0; j < usersFileLine.Length - 1; j++)
+            using (StreamWriter stream = new StreamWriter(users_stavUctu_subor))
             {
-                users_users.WriteLine(usersFileLine[j]);
+                for (int j = 0; j < usersFileLine.Length - 1; j++)
+                {
+                    stream.WriteLine(usersFileLine[j]);
+                }
             }
-            users_users.Close();
         }
 
         private void pictureBox_Prevod_Odoslat_Click_1(object sender, EventArgs e)
@@ -187,7 +201,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             string cisloUctuPrijimatela = textBox_Prevod_Cislo_Prijemcu.Text;
             double sumaPrevod = Convert.ToDouble(textBox_Prevod_Suma.Text);
 
-            StreamReader users_file = new StreamReader(users_subor, Encoding.UTF8);
+            StreamReader users_file = new StreamReader(users_stavUctu_subor, Encoding.UTF8);
             string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
             users_file.Close();
 
@@ -196,15 +210,20 @@ namespace p65_72_Zifcak_Ondra_Michlik
                 string line = usersFileLine[i];
                 string[] lineKusy = line.Split(';');
                 string hladaneId = lineKusy[0];
-                double stavUctu = Convert.ToDouble(lineKusy[9]);
+                double stavUctu = Convert.ToDouble(lineKusy[1]);
                 if (hladaneId == idPouzivatela)
                 {
                     if (!((stavUctu - sumaPrevod) < 0))
                     {
                         stavUctu -= sumaPrevod;
-                        usersFileLine[i].Split(';')[9] = Convert.ToString(stavUctu);
+                        string[] parts = usersFileLine[i].Split(';');
+                        parts[1] = Convert.ToString(stavUctu);
+                        usersFileLine[i] = string.Join(";", parts);
 
                         zapisDoSubora(usersFileLine);
+
+                        zistenieStavuUctu();
+                        label_Prevod_Stav_Uctu.Text = "Stav účtu:" + stavUctuPouzivatela.ToString() + "€";
 
                         StreamWriter transactions_file = new StreamWriter(transactions_subor, true, Encoding.UTF8);
 
@@ -241,47 +260,56 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Vklad_Vykonat_Click(object sender, EventArgs e)
         {
-
-            //generovanie ID tranzakcie s aktuálnym dátumom 
-            int id_tranzakcie = rand.Next(100000, 1000000);
-            string id_osoba = idPouzivatela;
-
-            string suma = textBox_Vklad.Text;
-
-            StreamReader users_file = new StreamReader(users_subor, Encoding.UTF8);
-            string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
-            users_file.Close();
-
-            for (int i = 0; i < usersFileLine.Length - 1; i++)
+            try
             {
-                string line = usersFileLine[i];
-                string[] lineKusy = line.Split(';');
-                string hladaneId = lineKusy[0];
-                double stavUctu = Convert.ToDouble(lineKusy[9]);
-                if (hladaneId == idPouzivatela)
+                //generovanie ID tranzakcie s aktuálnym dátumom 
+                int id_tranzakcie = rand.Next(100000, 1000000);
+                string id_osoba = idPouzivatela;
+
+                string suma = textBox_Vklad.Text;
+
+                StreamReader users_file = new StreamReader(users_stavUctu_subor, Encoding.UTF8);
+                string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
+                users_file.Close();
+
+                for (int i = 0; i < usersFileLine.Length - 1; i++)
                 {
-                    stavUctu += Convert.ToInt32(suma);
-                    usersFileLine[i].Split(';')[9] = Convert.ToString(stavUctu);
+                    string line = usersFileLine[i];
+                    string[] lineKusy = line.Split(';');
+                    string hladaneId = lineKusy[0];
+                    double stavUctu = Convert.ToDouble(lineKusy[1]);
+                    if (hladaneId == idPouzivatela)
+                    {
+                        stavUctu += Convert.ToDouble(suma);
+                        string[] parts = usersFileLine[i].Split(';');
+                        parts[1] = Convert.ToString(stavUctu);
+                        usersFileLine[i] = string.Join(";", parts);
+                        zapisDoSubora(usersFileLine);
 
-                    zapisDoSubora(usersFileLine);
+                        //pomoc ChatGPT
+                        string zapis = $"{id_tranzakcie},{id_osoba},vklad,{suma},{DateTime.Now:dd.MM.yyyy}";
 
-                    //pomoc ChatGPT
-                    string zapis = $"{id_tranzakcie},{id_osoba},vklad,{suma},{DateTime.Now:dd.MM.yyyy}";
+                        // Zápis do súboru
+                        StreamWriter finance = new StreamWriter(financie_subor, true, Encoding.UTF8);
+                        finance.WriteLine(zapis);
+                        finance.Close();
 
-                    // Zápis do súboru
-                    StreamWriter finance = new StreamWriter(financie_subor, true, Encoding.UTF8);
-                    finance.WriteLine(zapis);
-                    finance.Close();
-
-                    break;
+                        break;
+                    }
                 }
+
+                // ošetrenie po zápise vkladu
+                textBox_Vklad.Text = "";
+
+                //oznámenie o vykonanom vklade
+                MessageBox.Show("Vklad bol zaznamenaný.");
+                zistenieStavuUctu();
+                label_Vklad_Stav_Uctu.Text = "Stav účtu:" + stavUctuPouzivatela.ToString() + "€";
             }
-
-            // ošetrenie po zápise vkladu
-            textBox_Vklad.Text = "";
-
-            //oznámenie o vykonanom vklade
-            MessageBox.Show("Vklad bol zaznamenaný.");
+            catch (Exception)
+            {
+                MessageBox.Show("Musíš zadať sumu!");
+            }
         }
     }
 }
