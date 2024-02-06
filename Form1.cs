@@ -109,6 +109,10 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Registracia.Visible = true;
             panel_Registracia.Enabled = true;
             panel_Login.Enabled = false;
+
+            string test = "-100";
+            int test1 = Convert.ToInt32(test);
+            MessageBox.Show(test1.ToString());
         }
 
         private void pictureBox_Registracia_Cancel_Click(object sender, EventArgs e)
@@ -394,8 +398,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
                                 zapisanieDoSuboru();
                             }
                         }
-
                     }
+
                     else if (!spravneMenoPriezvisko()) MessageBox.Show("Zadal si nesprávne meno alebo priezvisko!", "Chyba!");
                     else if (!spravneTelefonneCislo()) MessageBox.Show("Zadal si nesprávne telefónne číslo!", "Chyba!");
                     else if (!spravnyPin()) MessageBox.Show("Zadal si nesprávny pin!", "Chyba!");

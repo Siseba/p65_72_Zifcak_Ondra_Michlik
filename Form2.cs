@@ -216,6 +216,27 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Domov.Enabled = true;
         }
 
+        private void pictureBox_Vypis_Uctu_Click(object sender, EventArgs e)
+        {
+            this.Text = "Vypis";
+
+            panel_Domov.Visible = false;
+            panel_VypisUctu.Visible = true;
+            panel_VypisUctu.Enabled = true;
+            panel_Domov.Enabled = false;
+
+        }
+
+        private void pictureBox_Vypis_Spat_Click(object sender, EventArgs e)
+        {
+            this.Text = "Domov";
+
+            panel_Domov.Visible = true;
+            panel_VypisUctu.Visible = false;
+            panel_VypisUctu.Enabled = false;
+            panel_Domov.Enabled = true;
+        }
+
         private void zapisDoSubora(string[] usersFileLine)
         {
             using (StreamWriter stream = new StreamWriter(users_stavUctu_subor))
@@ -507,11 +528,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         }
 
-
-
-
-
-
+        
     }
 
 

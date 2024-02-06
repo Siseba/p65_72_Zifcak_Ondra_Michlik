@@ -83,6 +83,16 @@ namespace p65_72_Zifcak_Ondra_Michlik.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pozadie_ciste2 {
+            get {
+                object obj = ResourceManager.GetObject("pozadie_ciste2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pozadie_domovska_plocha {
             get {
                 object obj = ResourceManager.GetObject("pozadie_domovska_plocha", resourceCulture);
@@ -146,6 +156,16 @@ namespace p65_72_Zifcak_Ondra_Michlik.Properties {
         internal static System.Drawing.Bitmap pozadie_vyber {
             get {
                 object obj = ResourceManager.GetObject("pozadie_vyber", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sipka_spat {
+            get {
+                object obj = ResourceManager.GetObject("sipka_spat", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
