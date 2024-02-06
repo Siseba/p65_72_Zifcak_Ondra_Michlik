@@ -109,10 +109,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Registracia.Visible = true;
             panel_Registracia.Enabled = true;
             panel_Login.Enabled = false;
-
-            string test = "-100";
-            int test1 = Convert.ToInt32(test);
-            MessageBox.Show(test1.ToString());
         }
 
         private void pictureBox_Registracia_Cancel_Click(object sender, EventArgs e)
