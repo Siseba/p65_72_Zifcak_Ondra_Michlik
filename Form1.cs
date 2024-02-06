@@ -25,7 +25,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         Random rand = new Random();
 
-        string users_subor = "users2.csv";
+        string users_subor = "users.csv";
         string users_stavUstu_subor = "users_stavUctu.csv";
 
         List<string> zaregistrovane_cisla = new List<string>();

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 
 namespace p65_72_Zifcak_Ondra_Michlik
 {
@@ -19,7 +20,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         Random rand = new Random();
 
-        string users_subor = "users2.csv";
+        string users_subor = "users.csv";
         string transactions_subor = "transactions.csv";
         string financie_subor = "financie.csv";
         string users_stavUctu_subor = "users_stavUctu.csv";
@@ -198,65 +199,90 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void pictureBox_Prevod_Odoslat_Click_1(object sender, EventArgs e)
         {
-            string cisloUctuPrijimatela = textBox_Prevod_Cislo_Prijemcu.Text;
-            double sumaPrevod = Convert.ToDouble(textBox_Prevod_Suma.Text);
-
-            StreamReader users_file = new StreamReader(users_stavUctu_subor, Encoding.UTF8);
-            string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
-            users_file.Close();
-
-            for (int i = 0; i < usersFileLine.Length - 1; i++)
+            try
             {
-                string line = usersFileLine[i];
-                string[] lineKusy = line.Split(';');
-                string hladaneId = lineKusy[0];
-                double stavUctu = Convert.ToDouble(lineKusy[1]);
-                if (hladaneId == idPouzivatela)
+                string cisloUctuPrijimatela = textBox_Prevod_Cislo_Prijemcu.Text;
+                double sumaPrevod = Convert.ToDouble(textBox_Prevod_Suma.Text);
+
+                if (cisloUctuPrijimatela.Length == 24)
                 {
-                    if (!((stavUctu - sumaPrevod) < 0))
+                    // regex funkcia pomocou chatGPT
+                    if (cisloUctuPrijimatela.StartsWith("SK") && Regex.IsMatch(cisloUctuPrijimatela.Substring(2), @"^\d+$"))
                     {
-                        stavUctu -= sumaPrevod;
-                        stavUctu = Math.Round(stavUctu, 2);
-                        string[] parts = usersFileLine[i].Split(';');
-                        parts[1] = Convert.ToString(stavUctu);
-                        usersFileLine[i] = string.Join(";", parts);
+                        if (sumaPrevod >= 5)
+                        {
+                            StreamReader users_file = new StreamReader(users_stavUctu_subor, Encoding.UTF8);
+                            string[] usersFileLine = users_file.ReadToEnd().Split(new char[] { '\n' });
+                            users_file.Close();
 
-                        zapisDoSubora(usersFileLine);
+                            for (int i = 0; i < usersFileLine.Length - 1; i++)
+                            {
+                                string line = usersFileLine[i];
+                                string[] lineKusy = line.Split(';');
+                                string hladaneId = lineKusy[0];
+                                double stavUctu = Convert.ToDouble(lineKusy[1]);
+                                if (hladaneId == idPouzivatela)
+                                {
+                                    if (!((stavUctu - sumaPrevod) < 0))
+                                    {
+                                        stavUctu -= sumaPrevod;
+                                        stavUctu = Math.Round(stavUctu, 2);
+                                        string[] parts = usersFileLine[i].Split(';');
+                                        parts[1] = Convert.ToString(stavUctu);
+                                        usersFileLine[i] = string.Join(";", parts);
 
-                        zistenieStavuUctu();
-                        label_Prevod_Stav_Uctu.Text = "Stav účtu:" + stavUctuPouzivatela.ToString() + "€";
+                                        zapisDoSubora(usersFileLine);
 
-                        StreamWriter transactions_file = new StreamWriter(transactions_subor, true, Encoding.UTF8);
+                                        zistenieStavuUctu();
+                                        label_Prevod_Stav_Uctu.Text = "Stav účtu:" + stavUctuPouzivatela.ToString() + "€";
 
-                        int id = rand.Next(1000, 10000);
-                        string idOsoba = idPouzivatela;
-                        string odosielatel = cisloUctuPouzivatela;
-                        string prijimatel = cisloUctuPrijimatela;
-                        string suma = textBox_Prevod_Suma.Text;
+                                        StreamWriter transactions_file = new StreamWriter(transactions_subor, true, Encoding.UTF8);
 
-                        DateTime dateAndTime = DateTime.Now;
-                        string datum = dateAndTime.ToString("dd.MM.yyyy");
+                                        int id = rand.Next(1000, 10000);
+                                        string idOsoba = idPouzivatela;
+                                        string odosielatel = cisloUctuPouzivatela;
+                                        string prijimatel = cisloUctuPrijimatela;
+                                        string suma = textBox_Prevod_Suma.Text;
 
-                        string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5}", id, idOsoba, odosielatel, prijimatel, suma, datum);
-                        transactions_file.WriteLine(udaje_na_zapis);
+                                        DateTime dateAndTime = DateTime.Now;
+                                        string datum = dateAndTime.ToString("dd.MM.yyyy");
 
-                        textBox_Prevod_Cislo_Prijemcu.Text = "";
-                        textBox_Prevod_Suma.Text = "";
+                                        string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5}", id, idOsoba, odosielatel, prijimatel, suma, datum);
+                                        transactions_file.WriteLine(udaje_na_zapis);
 
-                        MessageBox.Show("Transakcia prebehla úspešne!!!");
+                                        textBox_Prevod_Cislo_Prijemcu.Text = "";
+                                        textBox_Prevod_Suma.Text = "";
 
-                        transactions_file.Close();
+                                        MessageBox.Show("Transakcia prebehla úspešne!!!");
 
-                        break;
-                    }
-                    else
+                                        transactions_file.Close();
+
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Nemáte dostatok financií na prevod!");
+                                        break;
+                                    }
+                                }
+                            } 
+                        } else
+                        {
+                            MessageBox.Show("Minimálna suma na prevod je 5€");
+                        }
+                    } else
                     {
-                        MessageBox.Show("Nemáte dostatok financií na prevod!");
-                        break;
+                        MessageBox.Show("Účet musí začínať s predponou SK a zvšok musia byť číslice");
                     }
+                } else
+                {
+                    MessageBox.Show("Zadaný účet musí obsahovať 24 znakov");
                 }
             }
-
+            catch (Exception)
+            {
+                MessageBox.Show("Musíš vyplniť všetky údaje!!");
+            }
         }
 
         private void pictureBox_Vklad_Vykonat_Click(object sender, EventArgs e)
