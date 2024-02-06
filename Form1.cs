@@ -125,6 +125,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
 
         // Picture box ( tlacidlo ) na login 
+        // po stlaceni tlacidla kontroluje ci je email a pin zhodny s udajmi zaregistrovaneho uzivatela v subore
+        // ak hej presmeruje ho to na domovsku stranku
 
         private void pictureBox_Login_Click(object sender, EventArgs e)
         {
@@ -150,6 +152,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
             users.Close();
             MessageBox.Show("Zadal si nespravne udaje!");
         }
+
+        // zavrie cely program
 
         private void pictureBox_Login_Close_Click(object sender, EventArgs e)
         {
@@ -297,14 +301,17 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
                 string pinHash = pinEncryption(pin);
 
+                // zapise registrovane udaje do users suboru
                 StreamWriter users = new StreamWriter(users_subor, true, Encoding.UTF8);
 
                 string udaje_na_zapis = string.Format("{0};{1};{2};{3};{4};{5};{6};{7};{8}", id, cislo_uctu, meno, priezvisko, pinHash, telefonne_cislo, email, adresa_cast, mesto_cast);
                 users.WriteLine(udaje_na_zapis);
 
+                // vymaze case pamat so stringom
                 users.Flush();
                 users.Close();
 
+                // vytvorenie suboru s idPouzivatelom a jeho stavom uctu
                 StreamWriter users_stavUctu = new StreamWriter(users_stavUstu_subor, true, Encoding.UTF8);
                 udaje_na_zapis = string.Format("{0};{1}", id, stav_uctu);
                 users_stavUctu.WriteLine(udaje_na_zapis);
@@ -341,6 +348,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
         }
 
         // Picture box ( tlacidlo ) na register 
+        // otestuje ci su udaje spravne zadane a zapise ich do suboru
 
         private void pictureBox_Registracia_Register_Click(object sender, EventArgs e)
         {
@@ -360,6 +368,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                     {
                         StreamReader users = new StreamReader(users_subor);
                         string riadok;
+                        // ak je subor prazdny cislo a email sa zapise do listov a udaje sa zapisu do suboru
                         if (string.IsNullOrEmpty(riadok = users.ReadLine()))
                         {
                             zaregistrovane_cisla.Add(textBox_Registracia_Tel_Cislo.Text);
@@ -370,6 +379,9 @@ namespace p65_72_Zifcak_Ondra_Michlik
                         else
                         {
                             string riadok1;
+                            // ak subor nie je prazdny udaje sa kontroluju s registrovanymi emailami a cislami ci existuju
+                            // ak nie, zapise sa do suboru
+                            // ak ano, vyhodi error
                             while (!string.IsNullOrEmpty(riadok1 = users.ReadLine()))
                             {
                                 string[] hodnoty = riadok1.Split(';');
@@ -396,6 +408,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
                         }
 
                     }
+                    // kontrola udajov ci su v spravnom formate
+                    // ak nie, vypise chybu
                     else if (!spravneMenoPriezvisko()) MessageBox.Show("Zadal si nesprávne meno alebo priezvisko!", "Chyba!");
                     else if (!spravneTelefonneCislo()) MessageBox.Show("Zadal si nesprávne telefónne číslo!", "Chyba!");
                     else if (!spravnyPin()) MessageBox.Show("Zadal si nesprávny pin!", "Chyba!");
