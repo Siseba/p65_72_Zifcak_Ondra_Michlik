@@ -406,6 +406,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                                 zapisanieDoSuboru();
                             }
                         }
+                    }
 
                     }
                     // kontrola udajov ci su v spravnom formate

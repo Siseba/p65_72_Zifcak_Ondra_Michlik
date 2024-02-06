@@ -137,5 +137,11 @@
   <ItemGroup>
     <None Include="Resources\pozadie_vyber.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_ciste2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sipka_spat.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

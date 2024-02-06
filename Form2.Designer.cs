@@ -36,11 +36,8 @@
             this.pictureBox_Vyber = new System.Windows.Forms.PictureBox();
             this.pictureBox_Vklad = new System.Windows.Forms.PictureBox();
             this.pictureBox_Profil = new System.Windows.Forms.PictureBox();
-            this.panel_Vyber = new System.Windows.Forms.Panel();
-            this.label_Vyber_Stav_Uctu = new System.Windows.Forms.Label();
-            this.pictureBox_Vyber_Vykonat = new System.Windows.Forms.PictureBox();
-            this.textBox_Vyber = new System.Windows.Forms.TextBox();
-            this.pictureBox_Vyber_Spat = new System.Windows.Forms.PictureBox();
+            this.panel_VypisUctu = new System.Windows.Forms.Panel();
+            this.pictureBox_Vypis_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Vklad = new System.Windows.Forms.Panel();
             this.pictureBox_Vklad_Vykonat = new System.Windows.Forms.PictureBox();
             this.label_Vklad_Stav_Uctu = new System.Windows.Forms.Label();
@@ -61,6 +58,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label_Profil_Meno = new System.Windows.Forms.Label();
             this.pictureBox_Profil_Spat = new System.Windows.Forms.PictureBox();
+            this.panel_Vyber = new System.Windows.Forms.Panel();
+            this.label_Vyber_Stav_Uctu = new System.Windows.Forms.Label();
+            this.pictureBox_Vyber_Vykonat = new System.Windows.Forms.PictureBox();
+            this.textBox_Vyber = new System.Windows.Forms.TextBox();
+            this.pictureBox_Vyber_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Domov.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Odhlasenie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Uctu)).BeginInit();
@@ -68,9 +70,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil)).BeginInit();
-            this.panel_Vyber.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Vykonat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Spat)).BeginInit();
+            this.panel_VypisUctu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Spat)).BeginInit();
             this.panel_Vklad.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad_Vykonat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad_Spat)).BeginInit();
@@ -79,6 +80,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Prevod_Spat)).BeginInit();
             this.panel_Profil.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).BeginInit();
+            this.panel_Vyber.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Vykonat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Spat)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Domov
@@ -90,7 +94,7 @@
             this.panel_Domov.Controls.Add(this.pictureBox_Vyber);
             this.panel_Domov.Controls.Add(this.pictureBox_Vklad);
             this.panel_Domov.Controls.Add(this.pictureBox_Profil);
-            this.panel_Domov.Location = new System.Drawing.Point(0, 0);
+            this.panel_Domov.Location = new System.Drawing.Point(0,0);
             this.panel_Domov.Name = "panel_Domov";
             this.panel_Domov.Size = new System.Drawing.Size(1416, 672);
             this.panel_Domov.TabIndex = 0;
@@ -113,6 +117,7 @@
             this.pictureBox_Vypis_Uctu.Size = new System.Drawing.Size(301, 284);
             this.pictureBox_Vypis_Uctu.TabIndex = 4;
             this.pictureBox_Vypis_Uctu.TabStop = false;
+            this.pictureBox_Vypis_Uctu.Click += new System.EventHandler(this.pictureBox_Vypis_Uctu_Click);
             // 
             // pictureBox_Prevod_Na_Ucet
             // 
@@ -154,60 +159,24 @@
             this.pictureBox_Profil.TabStop = false;
             this.pictureBox_Profil.Click += new System.EventHandler(this.pictureBox_Profil_Click);
             // 
-            // panel_Vyber
+            // panel_VypisUctu
             // 
-            this.panel_Vyber.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_vyber;
-            this.panel_Vyber.Controls.Add(this.label_Vyber_Stav_Uctu);
-            this.panel_Vyber.Controls.Add(this.pictureBox_Vyber_Vykonat);
-            this.panel_Vyber.Controls.Add(this.textBox_Vyber);
-            this.panel_Vyber.Controls.Add(this.pictureBox_Vyber_Spat);
-            this.panel_Vyber.Location = new System.Drawing.Point(0, 0);
-            this.panel_Vyber.Name = "panel_Vyber";
-            this.panel_Vyber.Size = new System.Drawing.Size(1416, 672);
-            this.panel_Vyber.TabIndex = 2;
+            this.panel_VypisUctu.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_ciste2;
+            this.panel_VypisUctu.Controls.Add(this.pictureBox_Vypis_Spat);
+            this.panel_VypisUctu.Location = new System.Drawing.Point(0, 0);
+            this.panel_VypisUctu.Name = "panel_VypisUctu";
+            this.panel_VypisUctu.Size = new System.Drawing.Size(1416, 672);
+            this.panel_VypisUctu.TabIndex = 5;
             // 
-            // label_Vyber_Stav_Uctu
+            // pictureBox_Vypis_Spat
             // 
-            this.label_Vyber_Stav_Uctu.AutoSize = true;
-            this.label_Vyber_Stav_Uctu.BackColor = System.Drawing.Color.Transparent;
-            this.label_Vyber_Stav_Uctu.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold);
-            this.label_Vyber_Stav_Uctu.ForeColor = System.Drawing.Color.White;
-            this.label_Vyber_Stav_Uctu.Location = new System.Drawing.Point(988, 76);
-            this.label_Vyber_Stav_Uctu.Name = "label_Vyber_Stav_Uctu";
-            this.label_Vyber_Stav_Uctu.Size = new System.Drawing.Size(192, 39);
-            this.label_Vyber_Stav_Uctu.TabIndex = 3;
-            this.label_Vyber_Stav_Uctu.Text = "Stav účtu: ";
-            // 
-            // pictureBox_Vyber_Vykonat
-            // 
-            this.pictureBox_Vyber_Vykonat.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Vyber_Vykonat.Location = new System.Drawing.Point(344, 492);
-            this.pictureBox_Vyber_Vykonat.Name = "pictureBox_Vyber_Vykonat";
-            this.pictureBox_Vyber_Vykonat.Size = new System.Drawing.Size(735, 109);
-            this.pictureBox_Vyber_Vykonat.TabIndex = 2;
-            this.pictureBox_Vyber_Vykonat.TabStop = false;
-            this.pictureBox_Vyber_Vykonat.Click += new System.EventHandler(this.pictureBox_Vyber_Vykonat_Click);
-            // 
-            // textBox_Vyber
-            // 
-            this.textBox_Vyber.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_Vyber.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Vyber.Location = new System.Drawing.Point(521, 260);
-            this.textBox_Vyber.Multiline = true;
-            this.textBox_Vyber.Name = "textBox_Vyber";
-            this.textBox_Vyber.Size = new System.Drawing.Size(380, 60);
-            this.textBox_Vyber.TabIndex = 1;
-            this.textBox_Vyber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // pictureBox_Vyber_Spat
-            // 
-            this.pictureBox_Vyber_Spat.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox_Vyber_Spat.Location = new System.Drawing.Point(47, 45);
-            this.pictureBox_Vyber_Spat.Name = "pictureBox_Vyber_Spat";
-            this.pictureBox_Vyber_Spat.Size = new System.Drawing.Size(80, 59);
-            this.pictureBox_Vyber_Spat.TabIndex = 0;
-            this.pictureBox_Vyber_Spat.TabStop = false;
-            this.pictureBox_Vyber_Spat.Click += new System.EventHandler(this.pictureBox_Vyber_Spat_Click);
+            this.pictureBox_Vypis_Spat.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.sipka_spat;
+            this.pictureBox_Vypis_Spat.Location = new System.Drawing.Point(46, 37);
+            this.pictureBox_Vypis_Spat.Name = "pictureBox_Vypis_Spat";
+            this.pictureBox_Vypis_Spat.Size = new System.Drawing.Size(81, 57);
+            this.pictureBox_Vypis_Spat.TabIndex = 0;
+            this.pictureBox_Vypis_Spat.TabStop = false;
+            this.pictureBox_Vypis_Spat.Click += new System.EventHandler(this.pictureBox_Vypis_Spat_Click);
             // 
             // panel_Vklad
             // 
@@ -436,6 +405,61 @@
             this.pictureBox_Profil_Spat.TabStop = false;
             this.pictureBox_Profil_Spat.Click += new System.EventHandler(this.pictureBox_Profil_Spat_Click);
             // 
+            // panel_Vyber
+            // 
+            this.panel_Vyber.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_vyber;
+            this.panel_Vyber.Controls.Add(this.label_Vyber_Stav_Uctu);
+            this.panel_Vyber.Controls.Add(this.pictureBox_Vyber_Vykonat);
+            this.panel_Vyber.Controls.Add(this.textBox_Vyber);
+            this.panel_Vyber.Controls.Add(this.pictureBox_Vyber_Spat);
+            this.panel_Vyber.Location = new System.Drawing.Point(0, 0);
+            this.panel_Vyber.Name = "panel_Vyber";
+            this.panel_Vyber.Size = new System.Drawing.Size(1416, 672);
+            this.panel_Vyber.TabIndex = 2;
+            // 
+            // label_Vyber_Stav_Uctu
+            // 
+            this.label_Vyber_Stav_Uctu.AutoSize = true;
+            this.label_Vyber_Stav_Uctu.BackColor = System.Drawing.Color.Transparent;
+            this.label_Vyber_Stav_Uctu.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold);
+            this.label_Vyber_Stav_Uctu.ForeColor = System.Drawing.Color.White;
+            this.label_Vyber_Stav_Uctu.Location = new System.Drawing.Point(988, 76);
+            this.label_Vyber_Stav_Uctu.Name = "label_Vyber_Stav_Uctu";
+            this.label_Vyber_Stav_Uctu.Size = new System.Drawing.Size(192, 39);
+            this.label_Vyber_Stav_Uctu.TabIndex = 3;
+            this.label_Vyber_Stav_Uctu.Text = "Stav účtu: ";
+            // 
+            // pictureBox_Vyber_Vykonat
+            // 
+            this.pictureBox_Vyber_Vykonat.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_Vyber_Vykonat.Location = new System.Drawing.Point(344, 492);
+            this.pictureBox_Vyber_Vykonat.Name = "pictureBox_Vyber_Vykonat";
+            this.pictureBox_Vyber_Vykonat.Size = new System.Drawing.Size(735, 109);
+            this.pictureBox_Vyber_Vykonat.TabIndex = 2;
+            this.pictureBox_Vyber_Vykonat.TabStop = false;
+            this.pictureBox_Vyber_Vykonat.Click += new System.EventHandler(this.pictureBox_Vyber_Vykonat_Click);
+            // 
+            // textBox_Vyber
+            // 
+            this.textBox_Vyber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_Vyber.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox_Vyber.Location = new System.Drawing.Point(521, 260);
+            this.textBox_Vyber.Multiline = true;
+            this.textBox_Vyber.Name = "textBox_Vyber";
+            this.textBox_Vyber.Size = new System.Drawing.Size(380, 60);
+            this.textBox_Vyber.TabIndex = 1;
+            this.textBox_Vyber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pictureBox_Vyber_Spat
+            // 
+            this.pictureBox_Vyber_Spat.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_Vyber_Spat.Location = new System.Drawing.Point(47, 45);
+            this.pictureBox_Vyber_Spat.Name = "pictureBox_Vyber_Spat";
+            this.pictureBox_Vyber_Spat.Size = new System.Drawing.Size(80, 59);
+            this.pictureBox_Vyber_Spat.TabIndex = 0;
+            this.pictureBox_Vyber_Spat.TabStop = false;
+            this.pictureBox_Vyber_Spat.Click += new System.EventHandler(this.pictureBox_Vyber_Spat_Click);
+            // 
             // Form_Domov
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -446,6 +470,7 @@
             this.Controls.Add(this.panel_Prevod_Na_Ucet);
             this.Controls.Add(this.panel_Profil);
             this.Controls.Add(this.panel_Vyber);
+            this.Controls.Add(this.panel_VypisUctu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -458,10 +483,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil)).EndInit();
-            this.panel_Vyber.ResumeLayout(false);
-            this.panel_Vyber.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Vykonat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Spat)).EndInit();
+            this.panel_VypisUctu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Spat)).EndInit();
             this.panel_Vklad.ResumeLayout(false);
             this.panel_Vklad.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad_Vykonat)).EndInit();
@@ -473,6 +496,10 @@
             this.panel_Profil.ResumeLayout(false);
             this.panel_Profil.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil_Spat)).EndInit();
+            this.panel_Vyber.ResumeLayout(false);
+            this.panel_Vyber.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Vykonat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vyber_Spat)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -511,5 +538,7 @@
         private System.Windows.Forms.Label label_Profil_Adresa;
         private System.Windows.Forms.Label label_Profil_Email;
         private System.Windows.Forms.Label label_Profil_Zostatok_Na_Ucte;
+        private System.Windows.Forms.Panel panel_VypisUctu;
+        private System.Windows.Forms.PictureBox pictureBox_Vypis_Spat;
     }
 }
