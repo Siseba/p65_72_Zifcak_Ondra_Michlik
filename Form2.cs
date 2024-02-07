@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
 
 namespace p65_72_Zifcak_Ondra_Michlik
 {
@@ -45,6 +46,8 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
             panel_Profil.Enabled = false;
             panel_Profil.Visible = false;
+
+            panel_Profil_Graf.Visible = false;
 
             // Vytvorenie potrebnych suborov ak nie su 
 
@@ -83,9 +86,9 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         private void zistenieCislaUctu()
         {
-            StreamReader udajeStavUctu = new StreamReader(users_subor, Encoding.UTF8);
+            StreamReader udajeCisloUctu = new StreamReader(users_subor, Encoding.UTF8);
             string riadok;
-            while ((riadok = udajeStavUctu.ReadLine()) != null)
+            while ((riadok = udajeCisloUctu.ReadLine()) != null)
             {
                 string[] hodnoty = riadok.Split(';');
                 if (hodnoty[0].Trim().ToLower() == idPouzivatela.ToString().ToLower())
@@ -93,14 +96,14 @@ namespace p65_72_Zifcak_Ondra_Michlik
                     cisloUctuPouzivatela = Convert.ToString(hodnoty[1]);
                 }
             }
-            udajeStavUctu.Close();
+            udajeCisloUctu.Close();
         }
 
         private void zistenieStavuUctu()
         {
-            StreamReader udaje = new StreamReader(users_stavUctu_subor, Encoding.UTF8);
+            StreamReader udajeStavUctu = new StreamReader(users_stavUctu_subor, Encoding.UTF8);
             string riadok;
-            while ((riadok = udaje.ReadLine()) != null)
+            while ((riadok = udajeStavUctu.ReadLine()) != null)
             {
                 string[] hodnoty = riadok.Split(';');
                 if (hodnoty[0].Trim().ToLower() == idPouzivatela.ToString().ToLower())
@@ -108,7 +111,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                     stavUctuPouzivatela = Convert.ToDouble(hodnoty[1]);
                 }
             }
-            udaje.Close();
+            udajeStavUctu.Close();
         }
 
         private void pictureBox_Vklad_Click(object sender, EventArgs e)
@@ -198,12 +201,20 @@ namespace p65_72_Zifcak_Ondra_Michlik
         {
             this.Text = "Profil";
 
+            celkovePrijmyVydaje();
+
+            MessageBox.Show("Prijem: " + celkovePrijmy.ToString());
+            MessageBox.Show("Vydaj: " + celkoveVydaje.ToString());
+
             zobrazenieInformaciiVProfile();
+
+            panel_Profil_Graf.Refresh();
 
             panel_Domov.Visible = false;
             panel_Profil.Visible = true;
             panel_Profil.Enabled = true;
             panel_Domov.Enabled = false;
+            panel_Profil_Graf.Visible = true;
         }
 
         private void pictureBox_Profil_Spat_Click(object sender, EventArgs e)
@@ -214,6 +225,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
             panel_Profil.Visible = false;
             panel_Profil.Enabled = false;
             panel_Domov.Enabled = true;
+            panel_Profil_Graf.Visible = false;
         }
 
         private void pictureBox_Vypis_Uctu_Click(object sender, EventArgs e)
@@ -404,7 +416,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                             zapisDoSubora(usersFileLine);
 
                             //pomoc ChatGPT
-                            string zapis = $"{id_tranzakcie},{id_osoba},vklad,{suma},{DateTime.Now:dd.MM.yyyy}";
+                            string zapis = $"{id_tranzakcie};{id_osoba};vklad;{suma};{DateTime.Now:dd.MM.yyyy}";
 
                             // Zápis do súboru
                             StreamWriter finance = new StreamWriter(financie_subor, true, Encoding.UTF8);
@@ -469,7 +481,7 @@ namespace p65_72_Zifcak_Ondra_Michlik
                                 zapisDoSubora(usersFileLine);
 
                                 //pomoc ChatGPT
-                                string zapis = $"{id_vyber},{id_osoba},vyber,{suma},{DateTime.Now:dd.MM.yyyy}";
+                                string zapis = $"{id_vyber};{id_osoba};vyber;{suma};{DateTime.Now:dd.MM.yyyy}";
 
                                 // Zápis do súboru
                                 StreamWriter finance = new StreamWriter(financie_subor, true, Encoding.UTF8);
@@ -528,8 +540,67 @@ namespace p65_72_Zifcak_Ondra_Michlik
 
         }
 
-        
+        double celkovePrijmy;
+        double celkoveVydaje;
+
+        private void celkovePrijmyVydaje() {
+
+            celkovePrijmy = 0;
+            celkoveVydaje = 0;
+
+            StreamReader udajeVkladVyber = new StreamReader(financie_subor, Encoding.UTF8);
+            string riadok;
+            while (!string.IsNullOrEmpty(riadok = udajeVkladVyber.ReadLine()))
+            {
+                string[] hodnoty = riadok.Split(';');
+                
+                if (hodnoty[1] == idPouzivatela.ToString())
+                {
+                    if (hodnoty[2] == "vklad")
+                    {
+                        celkovePrijmy += Convert.ToDouble(hodnoty[3]);
+                    }
+                    else if (hodnoty[2] == "vyber")
+                    {
+                        celkoveVydaje += Convert.ToDouble(hodnoty[3]);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            udajeVkladVyber.Close();
+
+            StreamReader udajeTranzakcie = new StreamReader(transactions_subor, Encoding.UTF8);
+            string riadok1;
+            while (!string.IsNullOrEmpty(riadok1 = udajeTranzakcie.ReadLine()))
+            {
+                string[] hodnoty = riadok1.Split(';');
+
+                    if (hodnoty[2] == cisloUctuPouzivatela)
+                    {
+                        celkovePrijmy += Convert.ToDouble(hodnoty[4]);
+                    }
+                    else if (hodnoty[2] != cisloUctuPouzivatela && hodnoty[3] == cisloUctuPouzivatela)
+                    {
+                        celkoveVydaje += Convert.ToDouble(hodnoty[4]);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+        private void panel_Profil_Graf_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics kp = e.Graphics;
+
+            int sirkaGrafVydaje;
+            int sirkaGrafPrijmy;
+
+            kp.FillRectangle(Brushes.White, 10, 10, 10, 240);
+        }
     }
-
-
 }

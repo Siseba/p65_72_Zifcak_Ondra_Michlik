@@ -51,6 +51,7 @@
             this.textBox_Prevod_Cislo_Odosielatel = new System.Windows.Forms.TextBox();
             this.pictureBox_Prevod_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Profil = new System.Windows.Forms.Panel();
+            this.panel_Profil_Graf = new System.Windows.Forms.Panel();
             this.label_Profil_Zostatok_Na_Ucte = new System.Windows.Forms.Label();
             this.label_Profil_Adresa = new System.Windows.Forms.Label();
             this.label_Profil_Email = new System.Windows.Forms.Label();
@@ -317,6 +318,7 @@
             // panel_Profil
             // 
             this.panel_Profil.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel_Profil.BackgroundImage")));
+            this.panel_Profil.Controls.Add(this.panel_Profil_Graf);
             this.panel_Profil.Controls.Add(this.label_Profil_Zostatok_Na_Ucte);
             this.panel_Profil.Controls.Add(this.label_Profil_Adresa);
             this.panel_Profil.Controls.Add(this.label_Profil_Email);
@@ -328,6 +330,15 @@
             this.panel_Profil.Name = "panel_Profil";
             this.panel_Profil.Size = new System.Drawing.Size(1416, 672);
             this.panel_Profil.TabIndex = 4;
+            // 
+            // panel_Profil_Graf
+            // 
+            this.panel_Profil_Graf.BackColor = System.Drawing.Color.Transparent;
+            this.panel_Profil_Graf.Location = new System.Drawing.Point(114, 361);
+            this.panel_Profil_Graf.Name = "panel_Profil_Graf";
+            this.panel_Profil_Graf.Size = new System.Drawing.Size(500, 260);
+            this.panel_Profil_Graf.TabIndex = 7;
+            this.panel_Profil_Graf.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Profil_Graf_Paint);
             // 
             // label_Profil_Zostatok_Na_Ucte
             // 
@@ -540,5 +551,6 @@
         private System.Windows.Forms.Label label_Profil_Zostatok_Na_Ucte;
         private System.Windows.Forms.Panel panel_VypisUctu;
         private System.Windows.Forms.PictureBox pictureBox_Vypis_Spat;
+        private System.Windows.Forms.Panel panel_Profil_Graf;
     }
 }
