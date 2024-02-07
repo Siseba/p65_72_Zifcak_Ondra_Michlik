@@ -275,12 +275,34 @@ namespace p65_72_Zifcak_Ondra_Michlik
             return ucet;
         }
 
+        // Funkcia na vytvorenie unikatneho id pouzivatelov
+        // Funkcia precita id pouzivatelov v tabulke a zapise ich do listu 
+        // Nasledne spocita pocet hodnot v liste ( pocet uzivatelov = pocet id = posledne id ) 
+        // Nakoniec vrati posledne id + 1
+
+        private int unikatneID()
+        {
+
+            StreamReader users = new StreamReader(users_subor, Encoding.UTF8);
+            string riadok;
+            while ((riadok = users.ReadLine()) != null)
+            {
+                string[] hodnoty = riadok.Split(';');
+                zaregistrovane_id.Add(Convert.ToInt32(hodnoty[0]));
+            }
+
+            users.Close();
+            int posledneId = zaregistrovane_id.Count();
+            return posledneId + 1;
+        }
+
+
         // Funkcia na zapisanie udajov do suboru
 
         private void zapisanieDoSuboru()
         {
 
-            int id = rand.Next(1000, 10000);
+            int id = unikatneID();
             int stav_uctu = 0;
 
             string cislo_uctu = generaciaUctu();
@@ -406,8 +428,6 @@ namespace p65_72_Zifcak_Ondra_Michlik
                                 zapisanieDoSuboru();
                             }
                         }
-                    }
-
                     }
                     // kontrola udajov ci su v spravnom formate
                     // ak nie, vypise chybu
