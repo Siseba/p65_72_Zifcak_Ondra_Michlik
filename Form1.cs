@@ -78,12 +78,20 @@ namespace p65_72_Zifcak_Ondra_Michlik
         {
             InitializeComponent();
             this.ActiveControl = null;
+
             FileStream file;
+            FileStream users_stavUctu_subor;
 
             if (!File.Exists(users_subor))
             {
                 file = File.Create(users_subor);
                 file.Close();
+            }
+
+            if (!File.Exists("users_stavUctu.csv"))
+            {
+                users_stavUctu_subor = File.Create("users_stavUctu.csv");
+                users_stavUctu_subor.Close();
             }
 
             loginPlaceholder();

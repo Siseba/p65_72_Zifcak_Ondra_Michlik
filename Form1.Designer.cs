@@ -199,6 +199,7 @@
             this.textBox_Login_Email.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox_Login_Email.Location = new System.Drawing.Point(171, 172);
             this.textBox_Login_Email.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.textBox_Login_Email.MaxLength = 31;
             this.textBox_Login_Email.Multiline = true;
             this.textBox_Login_Email.Name = "textBox_Login_Email";
             this.textBox_Login_Email.Size = new System.Drawing.Size(417, 48);

@@ -143,5 +143,8 @@
   <ItemGroup>
     <None Include="Resources\sipka_spat.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pozadie_profil_fix.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

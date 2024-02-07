@@ -37,6 +37,13 @@
             this.pictureBox_Vklad = new System.Windows.Forms.PictureBox();
             this.pictureBox_Profil = new System.Windows.Forms.PictureBox();
             this.panel_VypisUctu = new System.Windows.Forms.Panel();
+            this.dataGridView_vypis = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.typ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.z_uctu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.na_ucet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suma = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox_Vypis_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Vklad = new System.Windows.Forms.Panel();
             this.pictureBox_Vklad_Vykonat = new System.Windows.Forms.PictureBox();
@@ -51,6 +58,8 @@
             this.textBox_Prevod_Cislo_Odosielatel = new System.Windows.Forms.TextBox();
             this.pictureBox_Prevod_Spat = new System.Windows.Forms.PictureBox();
             this.panel_Profil = new System.Windows.Forms.Panel();
+            this.label_Profil_Vydaj = new System.Windows.Forms.Label();
+            this.label_Profil_Prijem = new System.Windows.Forms.Label();
             this.panel_Profil_Graf = new System.Windows.Forms.Panel();
             this.label_Profil_Zostatok_Na_Ucte = new System.Windows.Forms.Label();
             this.label_Profil_Adresa = new System.Windows.Forms.Label();
@@ -72,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil)).BeginInit();
             this.panel_VypisUctu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_vypis)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Spat)).BeginInit();
             this.panel_Vklad.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad_Vykonat)).BeginInit();
@@ -163,11 +173,69 @@
             // panel_VypisUctu
             // 
             this.panel_VypisUctu.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_ciste2;
+            this.panel_VypisUctu.Controls.Add(this.dataGridView_vypis);
             this.panel_VypisUctu.Controls.Add(this.pictureBox_Vypis_Spat);
             this.panel_VypisUctu.Location = new System.Drawing.Point(0, 0);
             this.panel_VypisUctu.Name = "panel_VypisUctu";
             this.panel_VypisUctu.Size = new System.Drawing.Size(1416, 672);
             this.panel_VypisUctu.TabIndex = 5;
+            // 
+            // dataGridView_vypis
+            // 
+            this.dataGridView_vypis.AllowUserToAddRows = false;
+            this.dataGridView_vypis.AllowUserToDeleteRows = false;
+            this.dataGridView_vypis.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_vypis.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.typ,
+            this.z_uctu,
+            this.na_ucet,
+            this.suma,
+            this.datum});
+            this.dataGridView_vypis.Location = new System.Drawing.Point(271, 37);
+            this.dataGridView_vypis.Name = "dataGridView_vypis";
+            this.dataGridView_vypis.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dataGridView_vypis.Size = new System.Drawing.Size(897, 522);
+            this.dataGridView_vypis.TabIndex = 1;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Width = 50;
+            // 
+            // typ
+            // 
+            this.typ.HeaderText = "typ";
+            this.typ.Name = "typ";
+            this.typ.ReadOnly = true;
+            // 
+            // z_uctu
+            // 
+            this.z_uctu.HeaderText = "z účtu";
+            this.z_uctu.Name = "z_uctu";
+            this.z_uctu.ReadOnly = true;
+            this.z_uctu.Width = 250;
+            // 
+            // na_ucet
+            // 
+            this.na_ucet.HeaderText = "na účet";
+            this.na_ucet.Name = "na_ucet";
+            this.na_ucet.ReadOnly = true;
+            this.na_ucet.Width = 250;
+            // 
+            // suma
+            // 
+            this.suma.HeaderText = "suma";
+            this.suma.Name = "suma";
+            this.suma.ReadOnly = true;
+            // 
+            // datum
+            // 
+            this.datum.HeaderText = "dátum";
+            this.datum.Name = "datum";
+            this.datum.ReadOnly = true;
             // 
             // pictureBox_Vypis_Spat
             // 
@@ -227,7 +295,7 @@
             // 
             this.textBox_Vklad.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_Vklad.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox_Vklad.Location = new System.Drawing.Point(525, 263);
+            this.textBox_Vklad.Location = new System.Drawing.Point(524, 260);
             this.textBox_Vklad.Multiline = true;
             this.textBox_Vklad.Name = "textBox_Vklad";
             this.textBox_Vklad.Size = new System.Drawing.Size(380, 60);
@@ -281,6 +349,9 @@
             this.textBox_Prevod_Cislo_Prijemcu.Size = new System.Drawing.Size(545, 60);
             this.textBox_Prevod_Cislo_Prijemcu.TabIndex = 3;
             this.textBox_Prevod_Cislo_Prijemcu.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox_Prevod_Cislo_Prijemcu.Click += new System.EventHandler(this.textBox_Prevod_Cislo_Prijemcu_Click);
+            this.textBox_Prevod_Cislo_Prijemcu.Enter += new System.EventHandler(this.textBox_Prevod_Cislo_Prijemcu_Enter);
+            this.textBox_Prevod_Cislo_Prijemcu.Leave += new System.EventHandler(this.textBox_Prevod_Cislo_Prijemcu_Leave);
             // 
             // textBox_Prevod_Suma
             // 
@@ -292,10 +363,14 @@
             this.textBox_Prevod_Suma.Size = new System.Drawing.Size(334, 60);
             this.textBox_Prevod_Suma.TabIndex = 2;
             this.textBox_Prevod_Suma.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox_Prevod_Suma.Click += new System.EventHandler(this.textBox_Prevod_Suma_Click);
+            this.textBox_Prevod_Suma.Enter += new System.EventHandler(this.textBox_Prevod_Suma_Enter);
+            this.textBox_Prevod_Suma.Leave += new System.EventHandler(this.textBox_Prevod_Suma_Leave);
             // 
             // textBox_Prevod_Cislo_Odosielatel
             // 
             this.textBox_Prevod_Cislo_Odosielatel.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_Prevod_Cislo_Odosielatel.Enabled = false;
             this.textBox_Prevod_Cislo_Odosielatel.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox_Prevod_Cislo_Odosielatel.Location = new System.Drawing.Point(108, 191);
             this.textBox_Prevod_Cislo_Odosielatel.MaxLength = 24;
@@ -317,7 +392,9 @@
             // 
             // panel_Profil
             // 
-            this.panel_Profil.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel_Profil.BackgroundImage")));
+            this.panel_Profil.BackgroundImage = global::p65_72_Zifcak_Ondra_Michlik.Properties.Resources.pozadie_profil_fix;
+            this.panel_Profil.Controls.Add(this.label_Profil_Vydaj);
+            this.panel_Profil.Controls.Add(this.label_Profil_Prijem);
             this.panel_Profil.Controls.Add(this.panel_Profil_Graf);
             this.panel_Profil.Controls.Add(this.label_Profil_Zostatok_Na_Ucte);
             this.panel_Profil.Controls.Add(this.label_Profil_Adresa);
@@ -330,6 +407,28 @@
             this.panel_Profil.Name = "panel_Profil";
             this.panel_Profil.Size = new System.Drawing.Size(1416, 672);
             this.panel_Profil.TabIndex = 4;
+            // 
+            // label_Profil_Vydaj
+            // 
+            this.label_Profil_Vydaj.AutoSize = true;
+            this.label_Profil_Vydaj.BackColor = System.Drawing.Color.Transparent;
+            this.label_Profil_Vydaj.Font = new System.Drawing.Font("Arial Unicode MS", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label_Profil_Vydaj.ForeColor = System.Drawing.Color.White;
+            this.label_Profil_Vydaj.Location = new System.Drawing.Point(644, 517);
+            this.label_Profil_Vydaj.Name = "label_Profil_Vydaj";
+            this.label_Profil_Vydaj.Size = new System.Drawing.Size(0, 46);
+            this.label_Profil_Vydaj.TabIndex = 9;
+            // 
+            // label_Profil_Prijem
+            // 
+            this.label_Profil_Prijem.AutoSize = true;
+            this.label_Profil_Prijem.BackColor = System.Drawing.Color.Transparent;
+            this.label_Profil_Prijem.Font = new System.Drawing.Font("Arial Unicode MS", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label_Profil_Prijem.ForeColor = System.Drawing.Color.White;
+            this.label_Profil_Prijem.Location = new System.Drawing.Point(644, 399);
+            this.label_Profil_Prijem.Name = "label_Profil_Prijem";
+            this.label_Profil_Prijem.Size = new System.Drawing.Size(0, 46);
+            this.label_Profil_Prijem.TabIndex = 8;
             // 
             // panel_Profil_Graf
             // 
@@ -495,6 +594,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vklad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Profil)).EndInit();
             this.panel_VypisUctu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_vypis)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Vypis_Spat)).EndInit();
             this.panel_Vklad.ResumeLayout(false);
             this.panel_Vklad.PerformLayout();
@@ -552,5 +652,14 @@
         private System.Windows.Forms.Panel panel_VypisUctu;
         private System.Windows.Forms.PictureBox pictureBox_Vypis_Spat;
         private System.Windows.Forms.Panel panel_Profil_Graf;
+        private System.Windows.Forms.DataGridView dataGridView_vypis;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn typ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn z_uctu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn na_ucet;
+        private System.Windows.Forms.DataGridViewTextBoxColumn suma;
+        private System.Windows.Forms.DataGridViewTextBoxColumn datum;
+        private System.Windows.Forms.Label label_Profil_Vydaj;
+        private System.Windows.Forms.Label label_Profil_Prijem;
     }
 }
